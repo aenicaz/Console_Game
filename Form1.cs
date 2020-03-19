@@ -43,7 +43,7 @@ namespace AUT
                     try
                     {
                         client.ServerStatus();
-                        Thread.Sleep(250);
+                        Thread.Sleep(50);
                     }
                     catch
                     {
@@ -64,8 +64,8 @@ namespace AUT
                     }
                     catch
                     {
-                        MessageBox.Show("Сервер недоступен. Попытка переподключения...");
-                        Thread.Sleep(250);
+                        MessageBox.Show("Сервер недоступен. Нажмите ОК для переподключения...");
+                        Thread.Sleep(50);
                     }
                 }
             }
@@ -93,18 +93,22 @@ namespace AUT
 
         private void tbLogin_TextChanged(object sender, EventArgs e)
         {
+            if(tbLogin.Text.Length == 0)
+            {
+                StatusLogin.Text = null;
+            }
             var result = client.AvailabilityLogin(tbLogin.Text);
             if(result)
             {
                 StatusLogin.ForeColor = Color.Green;
                 StatusLogin.Text = "Ник доступен";
-                btConnect.Enabled = true;
+                //btConnect.Enabled = true;
             }
             else
             {
                 StatusLogin.ForeColor = Color.Red;
                 StatusLogin.Text = "Ник занят";
-                btConnect.Enabled = false;
+                //btConnect.Enabled = false;
             }
 
         }
