@@ -56,8 +56,10 @@ namespace WcfService
 
         public void ServerStatus()
         {
-            
+            //Пустой метод для проверки работы сервиса
         }
+        
+        
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
             if (composite == null)

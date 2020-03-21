@@ -37,7 +37,7 @@
             // tbLogin
             // 
             this.tbLogin.Location = new System.Drawing.Point(9, 10);
-            this.tbLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbLogin.Margin = new System.Windows.Forms.Padding(2);
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(76, 20);
             this.tbLogin.TabIndex = 0;
@@ -46,7 +46,7 @@
             // tbPassword
             // 
             this.tbPassword.Location = new System.Drawing.Point(9, 32);
-            this.tbPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbPassword.Margin = new System.Windows.Forms.Padding(2);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(76, 20);
             this.tbPassword.TabIndex = 1;
@@ -54,7 +54,7 @@
             // btConnect
             // 
             this.btConnect.Location = new System.Drawing.Point(9, 55);
-            this.btConnect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btConnect.Margin = new System.Windows.Forms.Padding(2);
             this.btConnect.Name = "btConnect";
             this.btConnect.Size = new System.Drawing.Size(56, 19);
             this.btConnect.TabIndex = 2;
@@ -79,9 +79,10 @@
             this.Controls.Add(this.btConnect);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.tbLogin);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

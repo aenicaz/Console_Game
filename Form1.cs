@@ -74,6 +74,11 @@ namespace AUT
 
         private void btConnect_Click(object sender, EventArgs e)
         {
+            if(tbLogin.TextLength < 1 || tbPassword.TextLength < 1)
+            {
+                MessageBox.Show("Одно из полей для ввода пусто!!!");
+                return;
+            }
             try
             {
                 var result = client.Authorization(tbLogin.Text, tbPassword.Text);
@@ -111,6 +116,11 @@ namespace AUT
                 //btConnect.Enabled = false;
             }
 
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            client.Close();
         }
     }
 }
