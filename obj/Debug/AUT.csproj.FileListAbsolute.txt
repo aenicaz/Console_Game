@@ -12,8 +12,8 @@ C:\Users\good\Desktop\Project\Game\Console_Game\bin\Debug\AUT.exe.config
 C:\Users\good\Desktop\Project\Game\Console_Game\bin\Debug\AUT.exe
 C:\Users\good\Desktop\Project\Game\Console_Game\bin\Debug\AUT.pdb
 C:\Users\good\Desktop\Project\Game\Console_Game\obj\Debug\AUT.csprojAssemblyReference.cache
-C:\Users\good\Desktop\Project\Game\Console_Game\obj\Debug\AUT.Form1.resources
 C:\Users\good\Desktop\Project\Game\Console_Game\obj\Debug\AUT.Properties.Resources.resources
 C:\Users\good\Desktop\Project\Game\Console_Game\obj\Debug\AUT.csproj.GenerateResource.cache
 C:\Users\good\Desktop\Project\Game\Console_Game\obj\Debug\AUT.exe
 C:\Users\good\Desktop\Project\Game\Console_Game\obj\Debug\AUT.pdb
+C:\Users\good\Desktop\Project\Game\Console_Game\obj\Debug\AUT.Game.resources

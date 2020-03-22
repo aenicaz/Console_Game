@@ -13,11 +13,11 @@ using System.Threading;
 
 namespace AUT
 {
-    public partial class Form1 : Form
+    public partial class Game : Form
     {
         AuthorizationClient client = null;
 
-        public Form1()
+        public Game()
         {
             InitializeComponent();
         }
@@ -107,13 +107,13 @@ namespace AUT
             {
                 StatusLogin.ForeColor = Color.Green;
                 StatusLogin.Text = "Ник доступен";
-                //btConnect.Enabled = true;
+                btnReg.Enabled = true;
             }
             else
             {
                 StatusLogin.ForeColor = Color.Red;
                 StatusLogin.Text = "Ник занят";
-                //btConnect.Enabled = false;
+                btnReg.Enabled = false;
             }
 
         }
@@ -121,6 +121,16 @@ namespace AUT
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             client.Close();
+        }
+
+        private void btnReg_Click(object sender, EventArgs e)
+        {
+            panelAuth.Visible = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
