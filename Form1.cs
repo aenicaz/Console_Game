@@ -136,6 +136,7 @@ namespace AUT
             }
         }
 
+        //Проверка полей для ввода
         private bool ValidOfData()
         {
             if (tbLogin.TextLength < 1 || tbPassword.TextLength < 1)
