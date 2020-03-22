@@ -30,10 +30,10 @@
         {
             this.StatusLogin = new System.Windows.Forms.Label();
             this.panelAuth = new System.Windows.Forms.Panel();
-            this.btConnect = new System.Windows.Forms.Button();
-            this.tbLogin = new System.Windows.Forms.TextBox();
-            this.btnReg = new System.Windows.Forms.Button();
             this.tbPassword = new System.Windows.Forms.TextBox();
+            this.btnReg = new System.Windows.Forms.Button();
+            this.tbLogin = new System.Windows.Forms.TextBox();
+            this.btConnect = new System.Windows.Forms.Button();
             this.panelAuth.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,25 +57,14 @@
             this.panelAuth.Size = new System.Drawing.Size(256, 143);
             this.panelAuth.TabIndex = 5;
             // 
-            // btConnect
+            // tbPassword
             // 
-            this.btConnect.Location = new System.Drawing.Point(67, 58);
-            this.btConnect.Margin = new System.Windows.Forms.Padding(2);
-            this.btConnect.Name = "btConnect";
-            this.btConnect.Size = new System.Drawing.Size(82, 23);
-            this.btConnect.TabIndex = 2;
-            this.btConnect.Text = "Авторизация";
-            this.btConnect.UseVisualStyleBackColor = true;
-            this.btConnect.Click += new System.EventHandler(this.btConnect_Click);
-            // 
-            // tbLogin
-            // 
-            this.tbLogin.Location = new System.Drawing.Point(67, 12);
-            this.tbLogin.Margin = new System.Windows.Forms.Padding(2);
-            this.tbLogin.Name = "tbLogin";
-            this.tbLogin.Size = new System.Drawing.Size(82, 20);
-            this.tbLogin.TabIndex = 0;
-            this.tbLogin.TextChanged += new System.EventHandler(this.tbLogin_TextChanged);
+            this.tbPassword.Location = new System.Drawing.Point(67, 34);
+            this.tbPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.Size = new System.Drawing.Size(82, 20);
+            this.tbPassword.TabIndex = 1;
             // 
             // btnReg
             // 
@@ -87,13 +76,25 @@
             this.btnReg.UseVisualStyleBackColor = true;
             this.btnReg.Click += new System.EventHandler(this.btnReg_Click);
             // 
-            // tbPassword
+            // tbLogin
             // 
-            this.tbPassword.Location = new System.Drawing.Point(67, 34);
-            this.tbPassword.Margin = new System.Windows.Forms.Padding(2);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(82, 20);
-            this.tbPassword.TabIndex = 1;
+            this.tbLogin.Location = new System.Drawing.Point(67, 12);
+            this.tbLogin.Margin = new System.Windows.Forms.Padding(2);
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.Size = new System.Drawing.Size(82, 20);
+            this.tbLogin.TabIndex = 0;
+            this.tbLogin.TextChanged += new System.EventHandler(this.tbLogin_TextChanged);
+            // 
+            // btConnect
+            // 
+            this.btConnect.Location = new System.Drawing.Point(67, 58);
+            this.btConnect.Margin = new System.Windows.Forms.Padding(2);
+            this.btConnect.Name = "btConnect";
+            this.btConnect.Size = new System.Drawing.Size(82, 23);
+            this.btConnect.TabIndex = 2;
+            this.btConnect.Text = "Авторизация";
+            this.btConnect.UseVisualStyleBackColor = true;
+            this.btConnect.Click += new System.EventHandler(this.btConnect_Click);
             // 
             // Game
             // 

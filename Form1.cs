@@ -81,7 +81,7 @@ namespace AUT
             }
             try
             {
-                var result = client.Authorization(tbLogin.Text, tbPassword.Text);
+                var result = client.Authorization(tbLogin.Text.ToLower(), tbPassword.Text);
                 if (result)
                     MessageBox.Show("Удачно");
                 else
@@ -102,7 +102,8 @@ namespace AUT
             {
                 StatusLogin.Text = null;
             }
-            var result = client.AvailabilityLogin(tbLogin.Text);
+
+            var result = client.AvailabilityLogin(tbLogin.Text.ToLower());
             if(result)
             {
                 StatusLogin.ForeColor = Color.Green;
@@ -125,12 +126,7 @@ namespace AUT
 
         private void btnReg_Click(object sender, EventArgs e)
         {
-            panelAuth.Visible = false;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
+            
         }
     }
 }
