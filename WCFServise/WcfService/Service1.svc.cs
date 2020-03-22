@@ -39,7 +39,7 @@ namespace WcfService
             {
                 using (StreamWriter writer = new StreamWriter(path, true))
                 {
-                    writer.Write($"{login} {password}\n");
+                    writer.Write($"\n{login} {password}");
                 }
                 return true;
             }

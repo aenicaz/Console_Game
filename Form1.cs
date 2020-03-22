@@ -125,7 +125,7 @@ namespace AUT
         {
             if(!ValidOfData())
             {
-                if(client.Registration(tbLogin.Text, tbPassword.Text))
+                if(client.Registration(tbLogin.Text.ToLower(), tbPassword.Text))
                 {
                     MessageBox.Show("Регистрация прошла успешно");
                 } 
