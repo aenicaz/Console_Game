@@ -96,6 +96,12 @@ namespace AUT.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/ServerStatus", ReplyAction="http://tempuri.org/IAuthorization/ServerStatusResponse")]
         System.Threading.Tasks.Task ServerStatusAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/Registration", ReplyAction="http://tempuri.org/IAuthorization/RegistrationResponse")]
+        bool Registration(string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/Registration", ReplyAction="http://tempuri.org/IAuthorization/RegistrationResponse")]
+        System.Threading.Tasks.Task<bool> RegistrationAsync(string login, string password);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IAuthorization/GetDataUsingDataContractResponse")]
         AUT.ServiceReference1.CompositeType GetDataUsingDataContract(AUT.ServiceReference1.CompositeType composite);
         
@@ -152,6 +158,14 @@ namespace AUT.ServiceReference1 {
         
         public System.Threading.Tasks.Task ServerStatusAsync() {
             return base.Channel.ServerStatusAsync();
+        }
+        
+        public bool Registration(string login, string password) {
+            return base.Channel.Registration(login, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegistrationAsync(string login, string password) {
+            return base.Channel.RegistrationAsync(login, password);
         }
         
         public AUT.ServiceReference1.CompositeType GetDataUsingDataContract(AUT.ServiceReference1.CompositeType composite) {

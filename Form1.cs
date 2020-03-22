@@ -74,24 +74,21 @@ namespace AUT
 
         private void btConnect_Click(object sender, EventArgs e)
         {
-            if(tbLogin.TextLength < 1 || tbPassword.TextLength < 1)
+            if(!ValidOfData())
             {
-                MessageBox.Show("Одно из полей для ввода пусто!!!");
-                return;
+                try
+                {
+                    var result = client.Authorization(tbLogin.Text.ToLower(), tbPassword.Text);
+                    if (result)
+                        MessageBox.Show("Удачно");
+                    else
+                        MessageBox.Show("Неудачно");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Не удаётся подключиться к серверу");
+                }
             }
-            try
-            {
-                var result = client.Authorization(tbLogin.Text.ToLower(), tbPassword.Text);
-                if (result)
-                    MessageBox.Show("Удачно");
-                else
-                    MessageBox.Show("Неудачно");
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Не удаётся подключиться к серверу");
-            }
-
         }
 
         
@@ -126,7 +123,30 @@ namespace AUT
 
         private void btnReg_Click(object sender, EventArgs e)
         {
-            
+            if(!ValidOfData())
+            {
+                if(client.Registration(tbLogin.Text, tbPassword.Text))
+                {
+                    MessageBox.Show("Регистрация прошла успешно");
+                } 
+                else
+                {
+                    MessageBox.Show("Ошибка регистрации");
+                }
+            }
+        }
+
+        private bool ValidOfData()
+        {
+            if (tbLogin.TextLength < 1 || tbPassword.TextLength < 1)
+            {
+                MessageBox.Show("Одно из полей для ввода пусто!!!");
+                return true;
+            }
+            else
+            {
+                return false;
+            }                
         }
     }
 }

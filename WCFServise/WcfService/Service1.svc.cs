@@ -13,10 +13,9 @@ namespace WcfService
     // ПРИМЕЧАНИЕ. Чтобы запустить клиент проверки WCF для тестирования службы, выберите элементы Service1.svc или Service1.svc.cs в обозревателе решений и начните отладку.
     public class Service1 : IAuthorization
     {
+        string path = @"C:\Users\good\Desktop\Project\Game\Console_Game\WCFServise\WcfService\App_Data\key.txt";
         public bool Authorization(string login, string password)
         {
-            string path = @"C:\Users\good\Desktop\Project\Game\Console_Game\WCFServise\WcfService\App_Data\key.txt";
-
             using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
             {
                 string line;
@@ -34,10 +33,24 @@ namespace WcfService
             }
         }
 
+        public bool Registration(string login, string password)
+        {
+            try 
+            {
+                using (StreamWriter writer = new StreamWriter(path, true))
+                {
+                    writer.Write($"{login} {password}\n");
+                }
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
         public bool AvailabilityLogin(string login)
         {
-            string path = @"C:\Users\good\Desktop\Project\Game\Console_Game\WCFServise\WcfService\App_Data\key.txt";
-
             using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
             {
                 string line;

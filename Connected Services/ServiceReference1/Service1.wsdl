@@ -25,6 +25,12 @@
   <wsdl:message name="IAuthorization_ServerStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:ServerStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IAuthorization_Registration_InputMessage">
+    <wsdl:part name="parameters" element="tns:Registration" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorization_Registration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrationResponse" />
+  </wsdl:message>
   <wsdl:message name="IAuthorization_GetDataUsingDataContract_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
   </wsdl:message>
@@ -43,6 +49,10 @@
     <wsdl:operation name="ServerStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthorization/ServerStatus" message="tns:IAuthorization_ServerStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthorization/ServerStatusResponse" message="tns:IAuthorization_ServerStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Registration">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorization/Registration" message="tns:IAuthorization_Registration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorization/RegistrationResponse" message="tns:IAuthorization_Registration_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthorization/GetDataUsingDataContract" message="tns:IAuthorization_GetDataUsingDataContract_InputMessage" />
@@ -71,6 +81,15 @@
     </wsdl:operation>
     <wsdl:operation name="ServerStatus">
       <soap:operation soapAction="http://tempuri.org/IAuthorization/ServerStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Registration">
+      <soap:operation soapAction="http://tempuri.org/IAuthorization/Registration" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

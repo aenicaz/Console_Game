@@ -22,7 +22,8 @@ namespace WcfService
         [OperationContract]
         void ServerStatus();
 
-
+        [OperationContract]
+        bool Registration(string login, string password);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
