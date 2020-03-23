@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -24,6 +25,9 @@ namespace WcfService
 
         [OperationContract]
         bool Registration(string login, string password);
+       
+        [OperationContract]
+        Player[] SendDataPlayers();
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);

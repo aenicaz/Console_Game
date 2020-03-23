@@ -10,12 +10,14 @@ using System.Windows.Forms;
 using System.IO;
 using AUT.ServiceReference1;
 using System.Threading;
+using AUT.Engine;
 
 namespace AUT
 {
     public partial class Game : Form
     {
         AuthorizationClient client = null;
+        Thread ServerStatus;
 
         public Game()
         {
@@ -26,7 +28,7 @@ namespace AUT
         {
             client = new AuthorizationClient();
 
-            Thread ServerStatus = new Thread(CheckServerStatus);
+            ServerStatus = new Thread(CheckServerStatus);
             ServerStatus.IsBackground = true;
             ServerStatus.Start();
         }
@@ -80,7 +82,12 @@ namespace AUT
                 {
                     var result = client.Authorization(tbLogin.Text.ToLower(), tbPassword.Text);
                     if (result)
-                        MessageBox.Show("Удачно");
+                    {
+                        this.Controls.Clear();
+
+                        Player player = new Player(tbLogin.Text);
+                        player.DrawPlayer();
+                    }  
                     else
                         MessageBox.Show("Неудачно");
                 }
@@ -118,6 +125,7 @@ namespace AUT
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ServerStatus.Abort();
             client.Close();
         }
 
@@ -149,5 +157,7 @@ namespace AUT
                 return false;
             }                
         }
+    
+        
     }
 }
