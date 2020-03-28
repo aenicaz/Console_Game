@@ -18,12 +18,12 @@ namespace WcfService.Engine
         [DataMember]
         private Point _position;
 
-
         public Player(string login)
         {
             _login = login;
             _color = GetRandomColor();
         }
+
 
        
         private Color GetRandomColor()
