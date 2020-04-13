@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService.Engine" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService.Engine" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:57260/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfPlayerServer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerServer" nillable="true" type="tns:PlayerServer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayerServer" nillable="true" type="tns:ArrayOfPlayerServer" />
+  <xs:complexType name="PlayerServer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_id" type="ser:guid" />
+      <xs:element minOccurs="0" name="_login" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerServer" nillable="true" type="tns:PlayerServer" />
+</xs:schema>

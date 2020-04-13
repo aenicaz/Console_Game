@@ -1,0 +1,84 @@
+﻿<Window x:Class="ClientWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:ClientWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="372" Width="618"
+        >
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding Closing}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.InputBindings>
+        <KeyBinding Key="D" Command="{Binding MoveRight}"/>
+        <KeyBinding Key="A" Command="{Binding MoveLeft}" />
+        <KeyBinding Key="W" Command="{Binding MoveTop}" />
+        <KeyBinding Key="S" Command="{Binding MoveDown}" />
+    </Window.InputBindings>
+    
+    <Grid>
+        <Grid Visibility="{Binding Visible, Mode=OneWay}" HorizontalAlignment="Left" Height="220" Margin="127,54,0,0" VerticalAlignment="Top" Width="410" Background="White" >
+            <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Height="30" Margin="93,38,0,0" TextWrapping="Wrap" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="176" Padding="0,0,0,10" FontSize="18" MaxLines="1" BorderThickness="1,0,0,0"/>
+            <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Height="30" Margin="93,87,0,0" TextWrapping="Wrap" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="176" BorderThickness="1,0,0,0" FontSize="18" Padding="0,0,0,10"/>
+            <Button x:Name="btnLogin" Command="{Binding Authorization}" Content="Авторизация" HorizontalAlignment="Left" Height="26" Margin="93,136,0,0" VerticalAlignment="Top" Width="111" BorderBrush="#FF797EF5" Background="White" Foreground="#FF2E4D5F"/>
+            <Button x:Name="btnReg" IsEnabled="{Binding Enabled, Mode=OneWay}" Command="{Binding Registration}" Content="Регистрация" HorizontalAlignment="Left" Height="25" Margin="93,167,0,0" VerticalAlignment="Top" Width="111" Background="White" BorderBrush="#FF797EFF" Foreground="#FF2E4D5F"/>
+            <Label x:Name="AvailabilityLogin" Content="{Binding Status, Mode=OneWay}" Foreground="#FF2E4D5F" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-22,0.8" Background="White"/>
+        </Grid>
+
+        <ItemsControl ItemsSource="{Binding ClientPlayer, Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <!-- это привязка координат контейнера к VM -->
+                    <Setter Property="Canvas.Left" Value="{Binding Position.X, Mode=OneWay}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Position.Y, Mode=OneWay}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <!-- тут описываете, как выглядит ваш элемент -->
+                    <!-- в вашем случае это Border -->
+                    <Rectangle Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}">
+
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding EnemyPlayers, Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <!-- это привязка координат контейнера к VM -->
+                    <Setter Property="Canvas.Left" Value="{Binding Position.X, Mode=OneWay}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Position.Y, Mode=OneWay}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <!-- тут описываете, как выглядит ваш элемент -->
+                    <!-- в вашем случае это Border -->
+                    <Rectangle Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}">
+
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+    
+</Window>
+    
+ 
