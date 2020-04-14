@@ -156,8 +156,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Console_Game\WCFServise\WcfService\WcfService.csproj">
-      <Project>{208E8F43-AC6A-4686-AC07-7330EF01ECCC}</Project>
+    <ProjectReference Include="..\Server\WcfService.csproj">
+      <Project>{208e8f43-ac6a-4686-ac07-7330ef01eccc}</Project>
       <Name>WcfService</Name>
     </ProjectReference>
   </ItemGroup>

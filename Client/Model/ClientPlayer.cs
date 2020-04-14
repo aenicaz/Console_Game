@@ -15,6 +15,10 @@ namespace ClientWPF.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public string Login
+        {
+            get { return _login; }
+        }
         public Point Position
         {
             get { return _position; }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\good\Desktop\Project\Game\ClientWPF\obj\Debug\
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\
 ClientWPF
 none
 false
 DEBUG;TRACE
-C:\Users\good\Desktop\Project\Game\ClientWPF\App.xaml
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\App.xaml
 2532411289
 
 15-1115654221
-171980667127
+17-762151405
 MainWindow.xaml;View\GameForm.xaml;
 
-True
+False
 

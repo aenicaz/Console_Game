@@ -46,11 +46,10 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <!-- тут описываете, как выглядит ваш элемент -->
-                    <!-- в вашем случае это Border -->
-                    <Rectangle Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}">
-
-                    </Rectangle>
+                    <Grid>
+                        <Rectangle  Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}"/>
+                        <Label Content="{Binding Login}"></Label>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
@@ -69,11 +68,12 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <!-- тут описываете, как выглядит ваш элемент -->
-                    <!-- в вашем случае это Border -->
-                    <Rectangle Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}">
+                    <Grid>
+                        <Rectangle Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}"/>
+                        <Label Content="{Binding Login}" />
+                    </Grid>
 
-                    </Rectangle>
+
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

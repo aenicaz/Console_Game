@@ -101,7 +101,8 @@ namespace ClientWPF.ViewModel
             {
                 return _closing ?? (_closing = new RelayCommand(obj =>
                 {
-                    AuthClient.client.Disconnect(ClientPlayer[0].ID);
+                    if(ClientPlayer.Count > 0)
+                        AuthClient.client.Disconnect(ClientPlayer[0].ID);
                 }));
             }
         }
