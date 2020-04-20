@@ -1,4 +1,5 @@
-﻿using ClientWPF.ViewModel;
+﻿using ClientWPF.Engine;
+using ClientWPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace ClientWPF
         {
             InitializeComponent();
 
-            DataContext = new AppViewModel();
+            DataContext = new AppViewModel(ConcreteMediator.getInstance());
         }
     }
 }

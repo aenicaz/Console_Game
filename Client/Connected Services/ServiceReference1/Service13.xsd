@@ -111,10 +111,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetFoods">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFoodsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="GetFoodsResult" nillable="true" type="q10:ArrayOfFoodPoint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ConnectEnemy">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WcfService.Engine" minOccurs="0" name="player" nillable="true" type="q10:PlayerServer" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/WcfService.Engine" minOccurs="0" name="player" nillable="true" type="q11:PlayerServer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -126,7 +138,7 @@
   <xs:element name="DisconectEnemy">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q11:guid" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q12:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -138,8 +150,8 @@
   <xs:element name="ChangeEnemyPosition">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q12:guid" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="position" type="q13:Point" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q13:guid" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="position" type="q14:Point" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -36,6 +37,9 @@ namespace WcfService
 
         [OperationContract]
         List<PlayerServer> GetAllPlayers(Guid id);
+
+        [OperationContract]
+        List<FoodPoint> GetFoods();
 
         // TODO: Добавьте здесь операции служб
     }

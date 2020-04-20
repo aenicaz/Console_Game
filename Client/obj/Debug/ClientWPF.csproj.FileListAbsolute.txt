@@ -60,3 +60,4 @@ C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\ClientWPF
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\ClientWPF.Properties.Resources.resources
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\ClientWPF.csproj.GenerateResource.cache
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\ClientWPF.csproj.CopyComplete
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\GeneratedInternalTypeHelper.g.cs

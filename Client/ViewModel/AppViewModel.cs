@@ -7,24 +7,23 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using WcfService.Engine;
+using WcfService;
+using ClientWPF.Engine;
 
 namespace ClientWPF.ViewModel
 {
-    class AppViewModel : ServiceReference1.IAuthorizationCallback, INotifyPropertyChanged
+    class AppViewModel : BaseViewModel, ServiceReference1.IAuthorizationCallback, INotifyPropertyChanged
     {
         private ClientPlayer _player;
         private RelayCommand _authorization;
         private RelayCommand _registration;
         private RelayCommand _closing;
-        private RelayCommand _moveRight;
-        private RelayCommand _moveLeft;
-        private RelayCommand _moveTop;
-        private RelayCommand _moveDown;
 
         public AuthReg AuthReg;
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<EnemyPlayer> EnemyPlayers { get; set; }
         public ObservableCollection<ClientPlayer> ClientPlayer { get; set; }
+        public ObservableCollection<FoodPoint> FoodPoints { get; set; }
 
 
         private string _password;
@@ -32,6 +31,8 @@ namespace ClientWPF.ViewModel
         private Visibility _visible;
         private bool _btnRegEnabled;
         private string _status;
+        
+
 
         public RelayCommand Authorization
         {
@@ -42,11 +43,14 @@ namespace ClientWPF.ViewModel
                     var id = AuthClient.client.Authorization(Login.ToLower(), Password);
                     if (id != Guid.Empty)
                     {
+
                         //Скрываем панель Авторизации
                         Visible = Visibility.Collapsed;
                         //Создаём игрока
                         _player = new Model.ClientPlayer(Login, id);
                         ClientPlayer.Add(_player);
+
+                        ControlVM.Player = _player;
 
                         //Получаем игроков с сервера для отображения
                         List<PlayerServer> EnemyList = AuthClient.client.GetAllPlayers(ClientPlayer[0].ID).ToList<PlayerServer>();
@@ -54,7 +58,10 @@ namespace ClientWPF.ViewModel
                         {
                             EnemyPlayers.Add(new EnemyPlayer(ServerPlayer.Login, ServerPlayer.ID, ServerPlayer.Position));
                         }
-                       
+
+                        FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
+
+
                     }
                     else
                     {
@@ -73,11 +80,15 @@ namespace ClientWPF.ViewModel
                     var id = AuthClient.client.Registration(Login.ToLower(), Password);
                     if (id != Guid.Empty)
                     {
+
                         //Скрываем панель Авторизации
                         Visible = Visibility.Collapsed;
+
                         //Создаём игрока
                         _player = new Model.ClientPlayer(Login, id);
                         ClientPlayer.Add(_player);
+
+                        ControlVM.Player = _player;
 
                         //Получаем игроков с сервера для отображения
                         List<PlayerServer> EnemyList = AuthClient.client.GetAllPlayers(ClientPlayer[0].ID).ToList<PlayerServer>();
@@ -85,6 +96,9 @@ namespace ClientWPF.ViewModel
                         {
                             EnemyPlayers.Add(new EnemyPlayer(ServerPlayer.Login, ServerPlayer.ID, ServerPlayer.Position));
                         }
+
+                        
+
 
                     }
                     else
@@ -106,64 +120,34 @@ namespace ClientWPF.ViewModel
                 }));
             }
         }
-        public RelayCommand MoveRight
+
+
+        public override void Notify(object data)
         {
-            get 
-            {
-                return _moveRight ?? (_moveRight = new RelayCommand(obj =>
-                {
-                    Controls.MoveRight(ClientPlayer[0]);                   
-                    AuthClient.client.ChangePosition(ClientPlayer[0].ID, ClientPlayer[0].Position);
-                }));
-            }
-        }
-        public RelayCommand MoveLeft
-        {
-            get
-            {
-                return _moveLeft ?? (_moveLeft = new RelayCommand(obj =>
-                {
-                    Controls.MoveLeft(ClientPlayer[0]);
-                    AuthClient.client.ChangePosition(ClientPlayer[0].ID, ClientPlayer[0].Position);
-                }));
-            }
-        }
-        public RelayCommand MoveTop
-        {
-            get
-            {
-                return _moveTop ?? (_moveTop = new RelayCommand(obj =>
-                {
-                    Controls.MoveTop(ClientPlayer[0]);
-                    AuthClient.client.ChangePosition(ClientPlayer[0].ID, ClientPlayer[0].Position);
-                }));
-            }
-        }
-        public RelayCommand MoveDown
-        {
-            get
-            {
-                return _moveDown ?? (_moveDown = new RelayCommand(obj =>
-                {
-                    Controls.MoveDown(ClientPlayer[0]);
-                    AuthClient.client.ChangePosition(ClientPlayer[0].ID, ClientPlayer[0].Position);
-                }));
-            }
+            
         }
 
-        public AppViewModel()
+        public AppViewModel(Mediator mediator): base(mediator)
         {
             AuthClient.client = new ServiceReference1.AuthorizationClient(new System.ServiceModel.InstanceContext(this));
             AuthClient.client.ServerStatus();
             ClientPlayer = new ObservableCollection<ClientPlayer>();
             EnemyPlayers = new ObservableCollection<EnemyPlayer>();
+            FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
+            
         }
         public string Login
         {
             get { return _login; }
             set 
             { 
-                if(value[value.Length-1] != ' ')
+                if(value.Length < 1)
+                {
+                    _login = value;
+                    OnPropertyChanged("Login");
+                    Ava();
+                }
+                else if(value[value.Length-1] != ' ')
                 {
                     _login = value;
                     OnPropertyChanged("Login");
@@ -223,7 +207,7 @@ namespace ClientWPF.ViewModel
             EnemyPlayers.Remove(player);
         }
 
-        public void ChangeEnemyPosition(Guid id, Point position)
+        public void ChangeEnemyPosition(Guid id, System.Windows.Point position)
         {
             var player = EnemyPlayers.FirstOrDefault(i => i.ID == id);
             if(player != null)
@@ -242,7 +226,5 @@ namespace ClientWPF.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-
-        
     }
 }

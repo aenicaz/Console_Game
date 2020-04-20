@@ -5,24 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:ClientWPF"
+        xmlns:vm="clr-namespace:ClientWPF.ViewModel"  
         mc:Ignorable="d"
         Title="MainWindow" Height="372" Width="618"
         >
-
+    <Window.Resources>
+        <vm:StatisticsVM x:Key="StatisticsVM"></vm:StatisticsVM>
+        <vm:ControlVM x:Key="ControlVM"></vm:ControlVM>
+    </Window.Resources>
+    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding Closing}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-
-    <Window.InputBindings>
-        <KeyBinding Key="D" Command="{Binding MoveRight}"/>
-        <KeyBinding Key="A" Command="{Binding MoveLeft}" />
-        <KeyBinding Key="W" Command="{Binding MoveTop}" />
-        <KeyBinding Key="S" Command="{Binding MoveDown}" />
-    </Window.InputBindings>
+   
     
     <Grid>
+        <!-- Авторизация\Регистрация -->
         <Grid Visibility="{Binding Visible, Mode=OneWay}" HorizontalAlignment="Left" Height="220" Margin="127,54,0,0" VerticalAlignment="Top" Width="410" Background="White" >
             <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Height="30" Margin="93,38,0,0" TextWrapping="Wrap" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="176" Padding="0,0,0,10" FontSize="18" MaxLines="1" BorderThickness="1,0,0,0"/>
             <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Height="30" Margin="93,87,0,0" TextWrapping="Wrap" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="176" BorderThickness="1,0,0,0" FontSize="18" Padding="0,0,0,10"/>
@@ -30,30 +30,14 @@
             <Button x:Name="btnReg" IsEnabled="{Binding Enabled, Mode=OneWay}" Command="{Binding Registration}" Content="Регистрация" HorizontalAlignment="Left" Height="25" Margin="93,167,0,0" VerticalAlignment="Top" Width="111" Background="White" BorderBrush="#FF797EFF" Foreground="#FF2E4D5F"/>
             <Label x:Name="AvailabilityLogin" Content="{Binding Status, Mode=OneWay}" Foreground="#FF2E4D5F" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-22,0.8" Background="White"/>
         </Grid>
+        
+        <!-- Статистика игры -->
+        <Grid DataContext="{StaticResource StatisticsVM}">
+            
+        </Grid>
 
-        <ItemsControl ItemsSource="{Binding ClientPlayer, Mode=OneWay}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas IsItemsHost="True"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <!-- это привязка координат контейнера к VM -->
-                    <Setter Property="Canvas.Left" Value="{Binding Position.X, Mode=OneWay}"/>
-                    <Setter Property="Canvas.Top" Value="{Binding Position.Y, Mode=OneWay}"/>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Rectangle  Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}"/>
-                        <Label Content="{Binding Login}"></Label>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <ItemsControl ItemsSource="{Binding EnemyPlayers, Mode=OneWay}">
+        <!-- Отображение игрока -->
+        <ItemsControl x:Name="Player" ItemsSource="{Binding ClientPlayer, Mode=OneWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas IsItemsHost="True"/>
@@ -70,7 +54,57 @@
                 <DataTemplate>
                     <Grid>
                         <Rectangle Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}"/>
-                        <Label Content="{Binding Login}" />
+                        <Label Content="{Binding Login}"></Label>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!-- Отображение противников -->
+        <ItemsControl ItemsSource="{Binding EnemyPlayers, Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <!-- это привязка координат контейнера к VM -->
+                    <Setter Property="Canvas.Left" Value="{Binding Position.X, Mode=OneWay}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Position.Y, Mode=OneWay}"/>
+                    
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Rectangle Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}"/>
+                        <Label  Content="{Binding Login}" />
+                    </Grid>
+
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+        <!-- Отображение еды -->
+        <ItemsControl ItemsSource="{Binding FoodPoints, Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <!-- это привязка координат контейнера к VM -->
+                    <Setter Property="Canvas.Left" Value="{Binding Position.X, Mode=OneWay}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Position.Y, Mode=OneWay}"/>
+
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Ellipse Fill="Green" Width="10" Height="10" />
                     </Grid>
 
 
@@ -78,7 +112,15 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </Grid>
-    
+
+
+    <!-- Обработка нажатий клавиш -->
+    <Window.InputBindings >
+        <KeyBinding Key="Right" CommandTarget="{Binding ElementName=Player}" Command="{Binding Source={StaticResource ControlVM}, Path=MoveRight}"/>
+        <KeyBinding Key="Left" CommandTarget="{Binding ElementName=Player}" Command="{Binding Source={StaticResource ControlVM}, Path=MoveLeft}" />
+        <KeyBinding Key="Up" CommandTarget="{Binding ElementName=Player}" Command="{Binding Source={StaticResource ControlVM}, Path=MoveTop}" />
+        <KeyBinding Key="Down" CommandTarget="{Binding ElementName=Player}" Command="{Binding Source={StaticResource ControlVM}, Path=MoveDown}" />
+    </Window.InputBindings>
 </Window>
     
  

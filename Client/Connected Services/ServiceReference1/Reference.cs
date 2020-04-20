@@ -62,6 +62,12 @@ namespace ClientWPF.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/GetAllPlayers", ReplyAction="http://tempuri.org/IAuthorization/GetAllPlayersResponse")]
         System.Threading.Tasks.Task<WcfService.Engine.PlayerServer[]> GetAllPlayersAsync(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/GetFoods", ReplyAction="http://tempuri.org/IAuthorization/GetFoodsResponse")]
+        WcfService.FoodPoint[] GetFoods();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/GetFoods", ReplyAction="http://tempuri.org/IAuthorization/GetFoodsResponse")]
+        System.Threading.Tasks.Task<WcfService.FoodPoint[]> GetFoodsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -167,6 +173,14 @@ namespace ClientWPF.ServiceReference1 {
         
         public System.Threading.Tasks.Task<WcfService.Engine.PlayerServer[]> GetAllPlayersAsync(System.Guid id) {
             return base.Channel.GetAllPlayersAsync(id);
+        }
+        
+        public WcfService.FoodPoint[] GetFoods() {
+            return base.Channel.GetFoods();
+        }
+        
+        public System.Threading.Tasks.Task<WcfService.FoodPoint[]> GetFoodsAsync() {
+            return base.Channel.GetFoodsAsync();
         }
     }
 }

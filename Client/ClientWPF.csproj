@@ -58,10 +58,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Engine\ConcreteMediator.cs" />
+    <Compile Include="Engine\Mediator.cs" />
     <Compile Include="Model\AuthReg.cs" />
     <Compile Include="Model\EnemyPlayer.cs" />
+    <Compile Include="Model\Statistics.cs" />
     <Compile Include="ViewModel\AppViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ControlVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\StatisticsVM.cs" />
     <Compile Include="View\GameForm.xaml.cs">
       <DependentUpon>GameForm.xaml</DependentUpon>
     </Compile>
@@ -124,8 +130,18 @@
     <None Include="Connected Services\ServiceReference1\Service14.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReference1\Service15.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\Service151.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\Service152.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\WcfService.CompositeType.datasource" />
     <None Include="Properties\DataSources\WcfService.Engine.PlayerServer.datasource" />
+    <None Include="Properties\DataSources\WcfService.FoodPoint.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -160,6 +176,9 @@
       <Project>{208e8f43-ac6a-4686-ac07-7330ef01eccc}</Project>
       <Name>WcfService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Animation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

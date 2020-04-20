@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
@@ -15,6 +16,18 @@ namespace WcfService
     {
         private string path = @"C:\Users\good\Desktop\Project\Game\Console_Game\WCFServise\WcfService\App_Data\key.txt";
 
+        public Service1()
+        {
+            Random r = new Random();
+            for(int i = 0; i <= 10; i++)
+            {
+                int x = r.Next(10, 550);
+                int y = r.Next(10, 350);
+                FoodPoint.FoodPoints.Add(new FoodPoint(x,y));
+            }
+
+        }
+
         public Guid Authorization(string login, string password)
         {
             using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
@@ -23,6 +36,11 @@ namespace WcfService
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] word = line.Split(' ');
+
+                    //Если уже есть авторизованнные с таким ником, то не даём авторизоваться
+                    var usedLogin = AllPlayers.players.FirstOrDefault(i => i.Login == login);
+                    if (usedLogin != null)
+                        return Guid.Empty;
 
                     if (word[0] == login && word[1] == password)
                     {
@@ -155,6 +173,11 @@ namespace WcfService
                     playerServer.OperationContext.GetCallbackChannel<IClientCallback>().ChangeEnemyPosition(id, position);
                 }
             }
+        }
+
+        public List<FoodPoint> GetFoods()
+        {
+            return FoodPoint.FoodPoints;
         }
     }
 }
