@@ -44,6 +44,13 @@ namespace ClientWPF.Model
             _id = id;
             ColorRect = GetRandomColor();
         }
+        public ClientPlayer(string login, Guid id, Point position)
+        {
+            _login = login;
+            _id = id;
+            Position = position;
+            ColorRect = GetRandomColor();
+        }
 
         private Brush GetRandomColor()
         {

@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\key.txt" />
+    <Content Include="App_Data\UserData\LastPosition.txt" />
     <Content Include="Service1.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -79,6 +80,7 @@
     <Compile Include="Engine\AllPlayers.cs" />
     <Compile Include="Engine\FoodPoint.cs" />
     <Compile Include="Engine\PlayerServer.cs" />
+    <Compile Include="Engine\SetGetPosition.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IClientCallback.cs" />
     <Compile Include="Service1.svc.cs">
@@ -87,9 +89,7 @@
     <Compile Include="IAuthorization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\UserData\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Dockerfile" />
     <None Include=".dockerignore">

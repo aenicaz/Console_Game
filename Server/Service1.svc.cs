@@ -28,7 +28,7 @@ namespace WcfService
 
         }
 
-        public Guid Authorization(string login, string password)
+        public PlayerServer Authorization(string login, string password)
         {
             using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
             {
@@ -40,11 +40,12 @@ namespace WcfService
                     //Если уже есть авторизованнные с таким ником, то не даём авторизоваться
                     var usedLogin = AllPlayers.players.FirstOrDefault(i => i.Login == login);
                     if (usedLogin != null)
-                        return Guid.Empty;
+                        return null;
 
                     if (word[0] == login && word[1] == password)
                     {
-                        PlayerServer player = new PlayerServer(login, Guid.NewGuid(), OperationContext.Current);
+                        Point lastPostion = SetGetPosition.LoadLastPosition(login);
+                        PlayerServer player = new PlayerServer(login, Guid.NewGuid(), lastPostion, OperationContext.Current);
 
                         AllPlayers.players.Add(player);
 
@@ -56,14 +57,14 @@ namespace WcfService
                             }
                         }
 
-                        return player.ID;
+                        return player;
                     }
                 }
-                return Guid.Empty;
+                return null;
             }
         }
 
-        public Guid Registration(string login, string password)
+        public PlayerServer Registration(string login, string password)
         {
             try
             {
@@ -83,11 +84,11 @@ namespace WcfService
                     }
                 }
 
-                return player.ID;
+                return player;
             }
             catch (Exception)
             {
-                return Guid.Empty;
+                return null;
             }
         }
 
@@ -144,11 +145,15 @@ namespace WcfService
         public void Disconnect(Guid id)
         {
             var player = AllPlayers.players.FirstOrDefault(i => i.ID == id);
+
+            SetGetPosition.SaveLastPoint(player.Login, player.Position);
+
             AllPlayers.players.Remove(player);
             foreach (PlayerServer playerServer in AllPlayers.players)
             {
                 playerServer.OperationContext.GetCallbackChannel<IClientCallback>().DisconectEnemy(id);
             }
+
 
         }
 

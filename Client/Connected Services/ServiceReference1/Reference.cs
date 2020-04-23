@@ -16,10 +16,10 @@ namespace ClientWPF.ServiceReference1 {
     public interface IAuthorization {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/Authorization", ReplyAction="http://tempuri.org/IAuthorization/AuthorizationResponse")]
-        System.Guid Authorization(string login, string password);
+        WcfService.Engine.PlayerServer Authorization(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/Authorization", ReplyAction="http://tempuri.org/IAuthorization/AuthorizationResponse")]
-        System.Threading.Tasks.Task<System.Guid> AuthorizationAsync(string login, string password);
+        System.Threading.Tasks.Task<WcfService.Engine.PlayerServer> AuthorizationAsync(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/Disconnect", ReplyAction="http://tempuri.org/IAuthorization/DisconnectResponse")]
         void Disconnect(System.Guid id);
@@ -40,10 +40,10 @@ namespace ClientWPF.ServiceReference1 {
         System.Threading.Tasks.Task ServerStatusAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/Registration", ReplyAction="http://tempuri.org/IAuthorization/RegistrationResponse")]
-        System.Guid Registration(string login, string password);
+        WcfService.Engine.PlayerServer Registration(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/Registration", ReplyAction="http://tempuri.org/IAuthorization/RegistrationResponse")]
-        System.Threading.Tasks.Task<System.Guid> RegistrationAsync(string login, string password);
+        System.Threading.Tasks.Task<WcfService.Engine.PlayerServer> RegistrationAsync(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/ChangePosition", ReplyAction="http://tempuri.org/IAuthorization/ChangePositionResponse")]
         void ChangePosition(System.Guid id, System.Windows.Point position);
@@ -111,11 +111,11 @@ namespace ClientWPF.ServiceReference1 {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public System.Guid Authorization(string login, string password) {
+        public WcfService.Engine.PlayerServer Authorization(string login, string password) {
             return base.Channel.Authorization(login, password);
         }
         
-        public System.Threading.Tasks.Task<System.Guid> AuthorizationAsync(string login, string password) {
+        public System.Threading.Tasks.Task<WcfService.Engine.PlayerServer> AuthorizationAsync(string login, string password) {
             return base.Channel.AuthorizationAsync(login, password);
         }
         
@@ -143,11 +143,11 @@ namespace ClientWPF.ServiceReference1 {
             return base.Channel.ServerStatusAsync();
         }
         
-        public System.Guid Registration(string login, string password) {
+        public WcfService.Engine.PlayerServer Registration(string login, string password) {
             return base.Channel.Registration(login, password);
         }
         
-        public System.Threading.Tasks.Task<System.Guid> RegistrationAsync(string login, string password) {
+        public System.Threading.Tasks.Task<WcfService.Engine.PlayerServer> RegistrationAsync(string login, string password) {
             return base.Channel.RegistrationAsync(login, password);
         }
         

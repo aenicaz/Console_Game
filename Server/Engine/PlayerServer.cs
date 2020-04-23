@@ -40,13 +40,21 @@ namespace WcfService.Engine
             get { return _login; }
         }
 
+
+        public PlayerServer(string login, Guid id, Point lastPosition, OperationContext operationContext)
+        {
+            _login = login;
+            _id = id;
+            Position = lastPosition;
+            OperationContext = operationContext;
+
+        }
         public PlayerServer(string login, Guid id, OperationContext operationContext)
         {
             _login = login;
             _id = id;
             Position = new Point(0, 0);
             OperationContext = operationContext;
-
         }
     }
 }

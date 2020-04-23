@@ -130,15 +130,6 @@
     <None Include="Connected Services\ServiceReference1\Service14.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReference1\Service15.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\Service151.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\Service152.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\DataSources\WcfService.CompositeType.datasource" />
     <None Include="Properties\DataSources\WcfService.Engine.PlayerServer.datasource" />
     <None Include="Properties\DataSources\WcfService.FoodPoint.datasource" />

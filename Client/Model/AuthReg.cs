@@ -9,34 +9,7 @@ namespace ClientWPF.Model
 {
     class AuthReg //авторизация/регистрация
     {
-        public static bool Authorization(string Login, string Password)
-        {
-            if (ValidData(Login, Password))
-            {
-                var id = AuthClient.client.Authorization(Login, Password);
-                if (id != Guid.Empty)
-                    return true;
-                else
-                    return false;
-            }
-            else
-                return false;
-            
-        }
-        public static bool Registration(string Login, string Password)
-        {
-            if (ValidData(Login, Password))
-            {
-                var id = AuthClient.client.Registration(Login, Password);
-                if (id != Guid.Empty)
-                    return true;
-                else
-                    return false;
-            }
-            else
-                return false;
-            
-        }
+       
         public static bool AvailabilityLogin(string login)
         {
             var result = AuthClient.client.AvailabilityLogin(login.ToLower());

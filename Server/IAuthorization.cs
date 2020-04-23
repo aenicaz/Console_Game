@@ -15,7 +15,7 @@ namespace WcfService
     {
 
         [OperationContract]
-        Guid Authorization(string login, string password);
+        PlayerServer Authorization(string login, string password);
 
         [OperationContract]
         void Disconnect(Guid id);
@@ -27,7 +27,7 @@ namespace WcfService
         void ServerStatus();
 
         [OperationContract]
-        Guid Registration(string login, string password);
+        PlayerServer Registration(string login, string password);
 
         [OperationContract]
         void ChangePosition(Guid id, Point position);

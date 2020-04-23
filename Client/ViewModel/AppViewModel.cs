@@ -26,8 +26,8 @@ namespace ClientWPF.ViewModel
         public ObservableCollection<FoodPoint> FoodPoints { get; set; }
 
 
-        private string _password;
-        private string _login;
+        private string _password = "";
+        private string _login = "";
         private Visibility _visible;
         private bool _btnRegEnabled;
         private string _status;
@@ -40,14 +40,14 @@ namespace ClientWPF.ViewModel
             {
                 return _authorization ?? (_authorization = new RelayCommand(obj =>
                 {
-                    var id = AuthClient.client.Authorization(Login.ToLower(), Password);
-                    if (id != Guid.Empty)
+                    var player = AuthClient.client.Authorization(Login.ToLower(), Password);
+                    if (player != null)
                     {
 
                         //Скрываем панель Авторизации
                         Visible = Visibility.Collapsed;
                         //Создаём игрока
-                        _player = new Model.ClientPlayer(Login, id);
+                        _player = new ClientPlayer(player.Login, player.ID, player.Position);
                         ClientPlayer.Add(_player);
 
                         ControlVM.Player = _player;
@@ -77,17 +77,18 @@ namespace ClientWPF.ViewModel
             {
                 return _registration ?? (_registration = new RelayCommand(obj =>
                 {
-                    var id = AuthClient.client.Registration(Login.ToLower(), Password);
-                    if (id != Guid.Empty)
+                    var player = AuthClient.client.Registration(Login.ToLower(), Password);
+                    if (player != null)
                     {
 
                         //Скрываем панель Авторизации
                         Visible = Visibility.Collapsed;
 
                         //Создаём игрока
-                        _player = new Model.ClientPlayer(Login, id);
+                        _player = new ClientPlayer(player.Login, player.ID);
                         ClientPlayer.Add(_player);
 
+                        //Перевести потом в медиатор медиатор !!!!!!!!!!
                         ControlVM.Player = _player;
 
                         //Получаем игроков с сервера для отображения

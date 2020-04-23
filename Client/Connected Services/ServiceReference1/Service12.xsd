@@ -1,33 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System.Windows" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Windows" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService.Engine" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService.Engine" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:57260/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:import schemaLocation="http://localhost:57260/Service1.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/System.Windows.Threading" />
-  <xs:complexType name="Point">
-    <xs:annotation>
-      <xs:appinfo>
-        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
-      </xs:appinfo>
-    </xs:annotation>
+  <xs:import schemaLocation="http://localhost:57260/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
+  <xs:complexType name="PlayerServer">
     <xs:sequence>
-      <xs:element name="_x" type="xs:double" />
-      <xs:element name="_y" type="xs:double" />
+      <xs:element minOccurs="0" name="_id" type="ser:guid" />
+      <xs:element minOccurs="0" name="_login" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="_position" type="q1:Point" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Point" nillable="true" type="tns:Point" />
-  <xs:complexType name="Freezable">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:DependencyObject">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
+  <xs:element name="PlayerServer" nillable="true" type="tns:PlayerServer" />
+  <xs:complexType name="ArrayOfPlayerServer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerServer" nillable="true" type="tns:PlayerServer" />
+    </xs:sequence>
   </xs:complexType>
-  <xs:element name="Freezable" nillable="true" type="tns:Freezable" />
-  <xs:complexType name="DependencyObject">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System.Windows.Threading" base="q1:DispatcherObject">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="DependencyObject" nillable="true" type="tns:DependencyObject" />
+  <xs:element name="ArrayOfPlayerServer" nillable="true" type="tns:ArrayOfPlayerServer" />
 </xs:schema>
