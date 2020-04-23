@@ -29,17 +29,17 @@ namespace ClientWPF.Engine
 
         public override void Send(object data, BaseViewModel viewModel)
         {
-            if(viewModel == ControlVM)
+            if(viewModel is ControlVM)
             {
 
             }
 
-            if (viewModel == AppViewModel)
+            if (viewModel is AppViewModel)
             {
-
+                ControlVM.Notify(data);
             }
 
-            if (viewModel == StatisticsVM)
+            if (viewModel is StatisticsVM)
             {
 
             }

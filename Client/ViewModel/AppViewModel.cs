@@ -121,20 +121,32 @@ namespace ClientWPF.ViewModel
             }
         }
 
-
+        //Pattern Mediator
         public override void Notify(object data)
         {
             
         }
+        public override void Send(object data)
+        {
+            //mediator 
+            mediator.Send(data, this);
+        }
+
+        //
 
         public AppViewModel(Mediator mediator): base(mediator)
         {
             AuthClient.client = new ServiceReference1.AuthorizationClient(new System.ServiceModel.InstanceContext(this));
             AuthClient.client.ServerStatus();
+
+            ConcreteMediator.getInstance().AppViewModel = this;
+
             ClientPlayer = new ObservableCollection<ClientPlayer>();
             EnemyPlayers = new ObservableCollection<EnemyPlayer>();
-            FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
-            
+            //FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
+
+            //тест
+            Send(FoodPoints);
         }
         public string Login
         {

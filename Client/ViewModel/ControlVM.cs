@@ -2,6 +2,7 @@
 using ClientWPF.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,12 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using WcfService;
 
 namespace ClientWPF.ViewModel
 {
     class ControlVM: BaseViewModel, INotifyPropertyChanged
     {
         public static ClientPlayer Player;
+        private ObservableCollection<FoodPoint> _foodPoints;
 
         private RelayCommand _moveRight;
         private RelayCommand _moveLeft;
@@ -71,12 +74,21 @@ namespace ClientWPF.ViewModel
 
         public ControlVM(): base(ConcreteMediator.getInstance())
         {
-            
+            ConcreteMediator.getInstance().ControlVM = this;
         }
 
+        public override void Send(object data)
+        {
+            mediator.Send(data, this); 
+        }
+
+        
         public override void Notify(object data)
         {
-            
+            if(data is ObservableCollection<FoodPoint>)
+            {
+                _foodPoints = (ObservableCollection<FoodPoint>)data;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

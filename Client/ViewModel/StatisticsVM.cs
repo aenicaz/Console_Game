@@ -16,7 +16,7 @@ namespace ClientWPF.ViewModel
 
         public StatisticsVM():base(ConcreteMediator.getInstance())
         {
-
+            ConcreteMediator.getInstance().StatisticsVM = this;
         }
 
         public override void Notify(object data)
@@ -24,6 +24,11 @@ namespace ClientWPF.ViewModel
             
         }
 
+        public override void Send(object data)
+        {
+            //mediator 
+            mediator.Send(data, this);
+        }
         public string Score
         {
             get { return _score; }

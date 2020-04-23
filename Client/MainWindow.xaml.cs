@@ -27,6 +27,8 @@ namespace ClientWPF
             InitializeComponent();
 
             DataContext = new AppViewModel(ConcreteMediator.getInstance());
+            ControlVM controlVM = new ControlVM();
+            StatisticsVM statisticsVM = new StatisticsVM();
         }
     }
 }

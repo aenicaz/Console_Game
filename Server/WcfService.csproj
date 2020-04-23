@@ -87,7 +87,9 @@
     <Compile Include="IAuthorization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\UserData\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
