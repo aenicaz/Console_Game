@@ -17,7 +17,7 @@ namespace ClientWPF.ViewModel
     class ControlVM: BaseViewModel, INotifyPropertyChanged
     {
         public static ClientPlayer Player;
-        public ObservableCollection<FoodPoint> _foodPoints;
+        private ObservableCollection<FoodPoint> _foodPoints;
 
         private RelayCommand _moveRight;
         private RelayCommand _moveLeft;

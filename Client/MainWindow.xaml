@@ -60,7 +60,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <!-- Отображение противников -->
-        <ItemsControl ItemsSource="{Binding EnemyPlayers, Mode=OneWay}">
+        <ItemsControl x:Name="Enemy"  ItemsSource="{Binding EnemyPlayers, Mode=OneWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas IsItemsHost="True"/>
@@ -87,7 +87,7 @@
         </ItemsControl>
         
         <!-- Отображение еды -->
-        <ItemsControl ItemsSource="{Binding FoodPoints, Mode=OneWay}">
+        <ItemsControl x:Name="Food"  ItemsSource="{Binding FoodPoints, Mode=OneWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas IsItemsHost="True"/>

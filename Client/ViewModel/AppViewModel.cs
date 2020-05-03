@@ -19,11 +19,11 @@ namespace ClientWPF.ViewModel
         private RelayCommand _registration;
         private RelayCommand _closing;
 
-        public AuthReg AuthReg;
+
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<EnemyPlayer> EnemyPlayers { get; set; }
         public ObservableCollection<ClientPlayer> ClientPlayer { get; set; }
-        public static ObservableCollection<FoodPoint> FoodPoints { get; set; }
+        public ObservableCollection<FoodPoint> FoodPoints { get; set; }
 
         private string _password = "";
         private string _login = "";
@@ -58,14 +58,14 @@ namespace ClientWPF.ViewModel
                             EnemyPlayers.Add(new EnemyPlayer(ServerPlayer.Login, ServerPlayer.ID, ServerPlayer.Position));
                         }
 
-                        //var foodList = AuthClient.client.GetFoods().ToList();
-                        //foreach (FoodPoint food in foodList)
-                        //{
-                        //    FoodPoints.Add(food);
-                        //}
-                        ////FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
-                        ////тест
-                        //Send(FoodPoints);
+                        //Получаем еду с серверa
+                        var foodList = AuthClient.client.GetFoods().ToList<FoodPoint>();
+                        foreach (FoodPoint food in foodList)
+                        {
+                            FoodPoints.Add(food);
+                        }
+                        //Передаём еду в ControlVM
+                        Send(FoodPoints);
 
                     }
                     else
@@ -103,7 +103,14 @@ namespace ClientWPF.ViewModel
                             EnemyPlayers.Add(new EnemyPlayer(ServerPlayer.Login, ServerPlayer.ID, ServerPlayer.Position));
                         }
 
-                        
+                        //Получаем еду с сервера
+                        var foodList = AuthClient.client.GetFoods().ToList<FoodPoint>();
+                        foreach (FoodPoint food in foodList)
+                        {
+                            FoodPoints.Add(food);
+                        }
+                        //Передаём еду в ControlVM
+                        Send(FoodPoints);
 
 
                     }
@@ -150,10 +157,7 @@ namespace ClientWPF.ViewModel
 
             ClientPlayer = new ObservableCollection<ClientPlayer>();
             EnemyPlayers = new ObservableCollection<EnemyPlayer>();
-
-            FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
-            //тест
-            Send(FoodPoints);
+            FoodPoints = new ObservableCollection<FoodPoint>();
 
         }
         public string Login
