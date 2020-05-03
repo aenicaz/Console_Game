@@ -11,6 +11,7 @@ namespace ClientWPF.Model
         private string _login;
         private Guid _id;
         private Point _position;
+        private int _size;
         private Brush _color;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,6 +29,15 @@ namespace ClientWPF.Model
                 OnPropertyChanged("Position");
             }
         }
+        public int Size
+        {
+            get { return _size; }
+            set
+            {
+                _size = value;
+                OnPropertyChanged("Size");
+            }
+        }
         public Guid ID
         {
             get { return _id; }
@@ -40,12 +50,15 @@ namespace ClientWPF.Model
 
         public ClientPlayer(string login, Guid id)
         {
+            Size = 32;
             _login = login;
             _id = id;
             ColorRect = GetRandomColor();
+
         }
         public ClientPlayer(string login, Guid id, Point position)
         {
+            Size = 32;
             _login = login;
             _id = id;
             Position = position;

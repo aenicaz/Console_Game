@@ -68,6 +68,12 @@ namespace ClientWPF.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/GetFoods", ReplyAction="http://tempuri.org/IAuthorization/GetFoodsResponse")]
         System.Threading.Tasks.Task<WcfService.FoodPoint[]> GetFoodsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/EatFood", ReplyAction="http://tempuri.org/IAuthorization/EatFoodResponse")]
+        void EatFood(int id, System.Guid id_player, WcfService.FoodPoint food);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/EatFood", ReplyAction="http://tempuri.org/IAuthorization/EatFoodResponse")]
+        System.Threading.Tasks.Task EatFoodAsync(int id, System.Guid id_player, WcfService.FoodPoint food);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -81,6 +87,9 @@ namespace ClientWPF.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/ChangeEnemyPosition", ReplyAction="http://tempuri.org/IAuthorization/ChangeEnemyPositionResponse")]
         void ChangeEnemyPosition(System.Guid id, System.Windows.Point position);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/EnemyEatFood", ReplyAction="http://tempuri.org/IAuthorization/EnemyEatFoodResponse")]
+        void EnemyEatFood(WcfService.FoodPoint foodPoint, int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -181,6 +190,14 @@ namespace ClientWPF.ServiceReference1 {
         
         public System.Threading.Tasks.Task<WcfService.FoodPoint[]> GetFoodsAsync() {
             return base.Channel.GetFoodsAsync();
+        }
+        
+        public void EatFood(int id, System.Guid id_player, WcfService.FoodPoint food) {
+            base.Channel.EatFood(id, id_player, food);
+        }
+        
+        public System.Threading.Tasks.Task EatFoodAsync(int id, System.Guid id_player, WcfService.FoodPoint food) {
+            return base.Channel.EatFoodAsync(id, id_player, food);
         }
     }
 }

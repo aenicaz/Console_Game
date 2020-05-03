@@ -53,7 +53,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Rectangle Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}"/>
+                        <Rectangle Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}"/>
                         <Label Content="{Binding Login}"></Label>
                     </Grid>
                 </DataTemplate>
@@ -106,8 +106,6 @@
                     <Grid>
                         <Ellipse Fill="Green" Width="10" Height="10" />
                     </Grid>
-
-
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

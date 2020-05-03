@@ -23,8 +23,7 @@ namespace ClientWPF.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<EnemyPlayer> EnemyPlayers { get; set; }
         public ObservableCollection<ClientPlayer> ClientPlayer { get; set; }
-        public ObservableCollection<FoodPoint> FoodPoints { get; set; }
-
+        public static ObservableCollection<FoodPoint> FoodPoints { get; set; }
 
         private string _password = "";
         private string _login = "";
@@ -59,8 +58,14 @@ namespace ClientWPF.ViewModel
                             EnemyPlayers.Add(new EnemyPlayer(ServerPlayer.Login, ServerPlayer.ID, ServerPlayer.Position));
                         }
 
-                        FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
-
+                        //var foodList = AuthClient.client.GetFoods().ToList();
+                        //foreach (FoodPoint food in foodList)
+                        //{
+                        //    FoodPoints.Add(food);
+                        //}
+                        ////FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
+                        ////тест
+                        //Send(FoodPoints);
 
                     }
                     else
@@ -125,7 +130,8 @@ namespace ClientWPF.ViewModel
         //Pattern Mediator
         public override void Notify(object data)
         {
-            
+            if (data is ObservableCollection<FoodPoint>)
+                FoodPoints = (ObservableCollection<FoodPoint>)data;
         }
         public override void Send(object data)
         {
@@ -144,10 +150,11 @@ namespace ClientWPF.ViewModel
 
             ClientPlayer = new ObservableCollection<ClientPlayer>();
             EnemyPlayers = new ObservableCollection<EnemyPlayer>();
-            //FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
 
+            FoodPoints = new ObservableCollection<FoodPoint>(AuthClient.client.GetFoods().ToList());
             //тест
             Send(FoodPoints);
+
         }
         public string Login
         {
@@ -229,9 +236,15 @@ namespace ClientWPF.ViewModel
 
         public void ConnectEnemy(PlayerServer player)
         {
-            EnemyPlayers.Add(new EnemyPlayer(player.Login, player.ID));
+            EnemyPlayers.Add(new EnemyPlayer(player.Login, player.ID, player.Position));
         }
-
+        public void EnemyEatFood(FoodPoint foodPoint, int id)
+        {
+            var food = FoodPoints.FirstOrDefault(i => i.ID == id);
+            FoodPoints.Remove(food);
+            FoodPoints.Add(foodPoint);
+            
+        }
 
 
         public void OnPropertyChanged([CallerMemberName]string prop = "")
@@ -239,5 +252,7 @@ namespace ClientWPF.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
+        
     }
 }

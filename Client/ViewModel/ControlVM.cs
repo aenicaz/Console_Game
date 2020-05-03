@@ -17,7 +17,7 @@ namespace ClientWPF.ViewModel
     class ControlVM: BaseViewModel, INotifyPropertyChanged
     {
         public static ClientPlayer Player;
-        private ObservableCollection<FoodPoint> _foodPoints;
+        public ObservableCollection<FoodPoint> _foodPoints;
 
         private RelayCommand _moveRight;
         private RelayCommand _moveLeft;
@@ -34,7 +34,8 @@ namespace ClientWPF.ViewModel
                         return;
                     Controls.MoveRight(Player);
                     AuthClient.client.ChangePosition(Player.ID, Player.Position);
-                    
+                    EatFood(Player);
+
                 }));
             }
         }
@@ -46,6 +47,7 @@ namespace ClientWPF.ViewModel
                 {
                     Controls.MoveLeft(Player);
                     AuthClient.client.ChangePosition(Player.ID, Player.Position);
+                    EatFood(Player);
                 }));
             }
         }
@@ -57,6 +59,7 @@ namespace ClientWPF.ViewModel
                 {
                     Controls.MoveTop(Player);
                     AuthClient.client.ChangePosition(Player.ID, Player.Position);
+                    EatFood(Player);
                 }));
             }
         }
@@ -68,6 +71,7 @@ namespace ClientWPF.ViewModel
                 {
                     Controls.MoveDown(Player);
                     AuthClient.client.ChangePosition(Player.ID, Player.Position);
+                    EatFood(Player);
                 }));
             }
         }
@@ -82,13 +86,42 @@ namespace ClientWPF.ViewModel
             mediator.Send(data, this); 
         }
 
-        
         public override void Notify(object data)
         {
             if(data is ObservableCollection<FoodPoint>)
             {
                 _foodPoints = (ObservableCollection<FoodPoint>)data;
             }
+        }
+
+        private void EatFood(ClientPlayer player)
+        {
+            int number = 0;
+            foreach(FoodPoint food in _foodPoints)
+            {
+                double l = Math.Sqrt(Math.Pow(food.Position.X+5 - (player.Position.X+player.Size/2), 2)
+                    + Math.Pow(food.Position.Y+5 - (player.Position.Y+player.Size/2), 2));
+
+                if (Math.Abs(l) < 21)
+                {
+                    number = food.ID;
+
+                    Random r = new Random();
+                    int x = r.Next(10, 550);
+                    int y = r.Next(10, 350);
+
+                    FoodPoint foodPoint = new FoodPoint(x, y, number);
+
+                     _foodPoints.Remove(food);
+                    //AppViewModel.FoodPoints.Remove(food);
+                    _foodPoints.Add(foodPoint);
+                    //AppViewModel.FoodPoints.Add(foodPoint);
+                    
+                    AuthClient.client.EatFood(number, player.ID, foodPoint);
+                    break;
+                }  
+            }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

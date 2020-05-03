@@ -7,6 +7,6 @@ C:\Users\good\Desktop\Project\Game\Console_Game\WCFServise\WcfService\obj\Debug\
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Server\bin\WcfService.dll.config
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Server\bin\WcfService.dll
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Server\bin\WcfService.pdb
-C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Server\obj\Debug\WcfService.csprojAssemblyReference.cache
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Server\obj\Debug\WcfService.dll
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Server\obj\Debug\WcfService.pdb
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Server\obj\Debug\WcfService.csprojAssemblyReference.cache

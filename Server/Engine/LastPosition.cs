@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace WcfService.Engine
 {
-    public class SetGetPosition
+    public class LastPosition
     {
         private static string path = @"C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Server\App_Data\UserData\LastPosition.txt";
         //Загрузка последней позиции

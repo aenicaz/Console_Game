@@ -41,6 +41,8 @@ namespace WcfService
         [OperationContract]
         List<FoodPoint> GetFoods();
 
+        [OperationContract]
+        void EatFood(int id, Guid id_player, FoodPoint food);
         // TODO: Добавьте здесь операции служб
     }
 

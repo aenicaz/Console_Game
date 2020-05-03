@@ -80,7 +80,7 @@
     <Compile Include="Engine\AllPlayers.cs" />
     <Compile Include="Engine\FoodPoint.cs" />
     <Compile Include="Engine\PlayerServer.cs" />
-    <Compile Include="Engine\SetGetPosition.cs" />
+    <Compile Include="Engine\LastPosition.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IClientCallback.cs" />
     <Compile Include="Service1.svc.cs">

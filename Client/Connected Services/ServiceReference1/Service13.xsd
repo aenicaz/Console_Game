@@ -123,10 +123,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="EatFood">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id_player" type="q11:guid" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="food" nillable="true" type="q12:FoodPoint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EatFoodResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ConnectEnemy">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/WcfService.Engine" minOccurs="0" name="player" nillable="true" type="q11:PlayerServer" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/WcfService.Engine" minOccurs="0" name="player" nillable="true" type="q13:PlayerServer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -138,7 +152,7 @@
   <xs:element name="DisconectEnemy">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q12:guid" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q14:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -150,12 +164,25 @@
   <xs:element name="ChangeEnemyPosition">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q13:guid" />
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="position" type="q14:Point" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q15:guid" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="position" type="q16:Point" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ChangeEnemyPositionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EnemyEatFood">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="foodPoint" nillable="true" type="q17:FoodPoint" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EnemyEatFoodResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

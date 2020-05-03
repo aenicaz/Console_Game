@@ -14,17 +14,12 @@ namespace WcfService
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class Service1 : IAuthorization
     {
+        //путь к файлу с паролями
         private string path = @"C:\Users\good\Desktop\Project\Game\Console_Game\WCFServise\WcfService\App_Data\key.txt";
 
         public Service1()
         {
-            Random r = new Random();
-            for(int i = 0; i <= 10; i++)
-            {
-                int x = r.Next(10, 550);
-                int y = r.Next(10, 350);
-                FoodPoint.FoodPoints.Add(new FoodPoint(x,y));
-            }
+            FoodPoint.CreateFood();
 
         }
 
@@ -44,7 +39,7 @@ namespace WcfService
 
                     if (word[0] == login && word[1] == password)
                     {
-                        Point lastPostion = SetGetPosition.LoadLastPosition(login);
+                        Point lastPostion = LastPosition.LoadLastPosition(login);
                         PlayerServer player = new PlayerServer(login, Guid.NewGuid(), lastPostion, OperationContext.Current);
 
                         AllPlayers.players.Add(player);
@@ -146,7 +141,7 @@ namespace WcfService
         {
             var player = AllPlayers.players.FirstOrDefault(i => i.ID == id);
 
-            SetGetPosition.SaveLastPoint(player.Login, player.Position);
+            LastPosition.SaveLastPoint(player.Login, player.Position);
 
             AllPlayers.players.Remove(player);
             foreach (PlayerServer playerServer in AllPlayers.players)
@@ -183,6 +178,22 @@ namespace WcfService
         public List<FoodPoint> GetFoods()
         {
             return FoodPoint.FoodPoints;
+        }
+
+        public void EatFood(int id, Guid id_player, FoodPoint foodPoint)
+        {
+            var foodServer = FoodPoint.FoodPoints.FirstOrDefault(i => i.ID == id);
+            FoodPoint.FoodPoints.Remove(foodServer);
+            FoodPoint.FoodPoints.Add(foodPoint);
+
+            foreach (PlayerServer playerServer in AllPlayers.players)
+            {
+                if(id_player != playerServer.ID)
+                    playerServer.OperationContext.GetCallbackChannel<IClientCallback>().EnemyEatFood(foodPoint, id);
+            }
+            
+            
+
         }
     }
 }

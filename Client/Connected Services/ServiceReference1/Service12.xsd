@@ -7,6 +7,7 @@
       <xs:element minOccurs="0" name="_id" type="ser:guid" />
       <xs:element minOccurs="0" name="_login" nillable="true" type="xs:string" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="_position" type="q1:Point" />
+      <xs:element minOccurs="0" name="_size" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerServer" nillable="true" type="tns:PlayerServer" />

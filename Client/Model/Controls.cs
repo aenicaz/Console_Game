@@ -39,5 +39,6 @@ namespace ClientWPF.Model
             player.Position = pos;
         }
 
+
     }
 }

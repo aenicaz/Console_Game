@@ -31,7 +31,7 @@ namespace ClientWPF.Engine
         {
             if(viewModel is ControlVM)
             {
-
+                AppViewModel.Notify(data);
             }
 
             if (viewModel is AppViewModel)

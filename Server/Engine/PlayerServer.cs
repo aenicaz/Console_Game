@@ -15,6 +15,8 @@ namespace WcfService.Engine
         private Guid _id;
         [DataMember]
         private Point _position;
+        [DataMember]
+        private int _size;
 
         public OperationContext OperationContext {get;set;}
 
@@ -40,6 +42,11 @@ namespace WcfService.Engine
             get { return _login; }
         }
 
+        public int Size
+        {
+            get { return _size; }
+            set { _size = value; }
+        }
 
         public PlayerServer(string login, Guid id, Point lastPosition, OperationContext operationContext)
         {
@@ -47,7 +54,15 @@ namespace WcfService.Engine
             _id = id;
             Position = lastPosition;
             OperationContext = operationContext;
-
+            Size = 32;
+        }
+        public PlayerServer(string login, Guid id, Point lastPosition, int size, OperationContext operationContext)
+        {
+            _login = login;
+            _id = id;
+            Position = lastPosition;
+            OperationContext = operationContext;
+            Size = size;
         }
         public PlayerServer(string login, Guid id, OperationContext operationContext)
         {
