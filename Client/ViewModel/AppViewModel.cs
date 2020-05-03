@@ -242,12 +242,16 @@ namespace ClientWPF.ViewModel
         {
             EnemyPlayers.Add(new EnemyPlayer(player.Login, player.ID, player.Position));
         }
-        public void EnemyEatFood(FoodPoint foodPoint, int id)
+        public void EnemyEatFood(FoodPoint foodPoint, int id, Guid id_player)
         {
             var food = FoodPoints.FirstOrDefault(i => i.ID == id);
             FoodPoints.Remove(food);
             FoodPoints.Add(foodPoint);
+
+            var player = EnemyPlayers.FirstOrDefault(i => i.ID == id_player);
+            player.Size++;
             
+           
         }
 
 

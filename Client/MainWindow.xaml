@@ -13,7 +13,7 @@
         <vm:StatisticsVM x:Key="StatisticsVM"></vm:StatisticsVM>
         <vm:ControlVM x:Key="ControlVM"></vm:ControlVM>
     </Window.Resources>
-    
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding Closing}" />
@@ -77,7 +77,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Rectangle Width="32" Height="32" Fill="{Binding ColorRect, Mode=OneWay}"/>
+                        <Rectangle Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}"/>
                         <Label  Content="{Binding Login}" />
                     </Grid>
 

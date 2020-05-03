@@ -186,10 +186,13 @@ namespace WcfService
             FoodPoint.FoodPoints.Remove(foodServer);
             FoodPoint.FoodPoints.Add(foodPoint);
 
+            var player = AllPlayers.players.FirstOrDefault(i => i.ID == id_player);
+            player.Size++;
+
             foreach (PlayerServer playerServer in AllPlayers.players)
             {
                 if(id_player != playerServer.ID)
-                    playerServer.OperationContext.GetCallbackChannel<IClientCallback>().EnemyEatFood(foodPoint, id);
+                    playerServer.OperationContext.GetCallbackChannel<IClientCallback>().EnemyEatFood(foodPoint, id, id_player);
             }
             
             

@@ -17,6 +17,6 @@ namespace WcfService
         [OperationContract]
         void ChangeEnemyPosition(Guid id, Point position);
         [OperationContract]
-        void EnemyEatFood(FoodPoint foodPoint, int id);
+        void EnemyEatFood(FoodPoint foodPoint, int id, Guid id_player);
     }
 }

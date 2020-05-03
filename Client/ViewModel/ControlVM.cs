@@ -102,7 +102,7 @@ namespace ClientWPF.ViewModel
                 double l = Math.Sqrt(Math.Pow(food.Position.X+5 - (player.Position.X+player.Size/2), 2)
                     + Math.Pow(food.Position.Y+5 - (player.Position.Y+player.Size/2), 2));
 
-                if (Math.Abs(l) < 21)
+                if (Math.Abs(l) < 5+player.Size/2) //5 = ширина/длина шара еды/2
                 {
                     number = food.ID;
 
@@ -113,9 +113,9 @@ namespace ClientWPF.ViewModel
                     FoodPoint foodPoint = new FoodPoint(x, y, number);
 
                      _foodPoints.Remove(food);
-                    //AppViewModel.FoodPoints.Remove(food);
                     _foodPoints.Add(foodPoint);
-                    //AppViewModel.FoodPoints.Add(foodPoint);
+
+                    player.Size++;
                     
                     AuthClient.client.EatFood(number, player.ID, foodPoint);
                     break;

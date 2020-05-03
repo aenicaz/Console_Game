@@ -89,7 +89,7 @@ namespace ClientWPF.ServiceReference1 {
         void ChangeEnemyPosition(System.Guid id, System.Windows.Point position);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/EnemyEatFood", ReplyAction="http://tempuri.org/IAuthorization/EnemyEatFoodResponse")]
-        void EnemyEatFood(WcfService.FoodPoint foodPoint, int id);
+        void EnemyEatFood(WcfService.FoodPoint foodPoint, int id, System.Guid id_player);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

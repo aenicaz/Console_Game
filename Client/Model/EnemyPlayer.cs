@@ -15,8 +15,10 @@ namespace ClientWPF.Model
         private string _login;
         private Point _position;
         private Brush _color;
+        private int _size = 32;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
 
         public Guid ID { get; private set;}
         public Point Position
@@ -27,6 +29,11 @@ namespace ClientWPF.Model
         public string Login
         {
             get { return _login; }
+        }
+        public int Size
+        {
+            get { return _size; }
+            set { _size = value; OnPropertyChanged("Size"); }
         }
         public Brush ColorRect
         {
