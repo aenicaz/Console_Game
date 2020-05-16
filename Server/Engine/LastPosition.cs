@@ -19,7 +19,7 @@ namespace WcfService.Engine
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] word = line.Split(' '); //разбиваем строку "логин позиция"
-
+                    //проверяем первое слово в строке
                     if (word[0] == login)
                     {
                         string pos = word[1].Replace(';', ',');
@@ -54,3 +54,4 @@ namespace WcfService.Engine
             }
         }
 }
+

@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 namespace ClientWPF.Model
 {
     //Статистика игры
-    class Statistics
+    class StatisticsPlayer
     {
-        private int _countPlayer;
         private int _score;
 
+        public void AddPoint()
+        {
+            _score++;
+            
+        }
     }
 }

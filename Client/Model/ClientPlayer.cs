@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using System.Windows;
+using ClientWPF.Model.Events;
 
 namespace ClientWPF.Model
 {
@@ -13,6 +14,8 @@ namespace ClientWPF.Model
         private Point _position;
         private int _size;
         private Brush _color;
+        public StatisticsPlayer stats = new StatisticsPlayer();
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -55,6 +58,9 @@ namespace ClientWPF.Model
             _id = id;
             ColorRect = GetRandomColor();
 
+            
+            PlayerEvents.GetInstance().Eat += EatFood;
+
         }
         public ClientPlayer(string login, Guid id, Point position)
         {
@@ -65,6 +71,10 @@ namespace ClientWPF.Model
             ColorRect = GetRandomColor();
         }
 
+        private void EatFood()
+        {
+            Size++;
+        }
         private Brush GetRandomColor()
         {
             Random r = new Random();

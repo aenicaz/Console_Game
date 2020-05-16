@@ -1,23 +1,18 @@
 ﻿using ClientWPF.Engine;
 using ClientWPF.Model;
+using ClientWPF.Model.Events;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 using WcfService;
 
 namespace ClientWPF.ViewModel
 {
-    class ControlVM: BaseViewModel, INotifyPropertyChanged
+    internal class ControlVM : BaseViewModel, INotifyPropertyChanged
     {
-        public static ClientPlayer Player;
-        private ObservableCollection<FoodPoint> _foodPoints;
+        private Controls controls = new Controls();
+
 
         private RelayCommand _moveRight;
         private RelayCommand _moveLeft;
@@ -30,12 +25,7 @@ namespace ClientWPF.ViewModel
             {
                 return _moveRight ?? (_moveRight = new RelayCommand(obj =>
                 {
-                    if (Player == null)
-                        return;
-                    Controls.MoveRight(Player);
-                    AuthClient.client.ChangePosition(Player.ID, Player.Position);
-                    EatFood(Player);
-
+                    controls.MoveRight();
                 }));
             }
         }
@@ -45,9 +35,7 @@ namespace ClientWPF.ViewModel
             {
                 return _moveLeft ?? (_moveLeft = new RelayCommand(obj =>
                 {
-                    Controls.MoveLeft(Player);
-                    AuthClient.client.ChangePosition(Player.ID, Player.Position);
-                    EatFood(Player);
+                    controls.MoveLeft();
                 }));
             }
         }
@@ -57,9 +45,7 @@ namespace ClientWPF.ViewModel
             {
                 return _moveTop ?? (_moveTop = new RelayCommand(obj =>
                 {
-                    Controls.MoveTop(Player);
-                    AuthClient.client.ChangePosition(Player.ID, Player.Position);
-                    EatFood(Player);
+                    controls.MoveTop();
                 }));
             }
         }
@@ -69,66 +55,43 @@ namespace ClientWPF.ViewModel
             {
                 return _moveDown ?? (_moveDown = new RelayCommand(obj =>
                 {
-                    Controls.MoveDown(Player);
-                    AuthClient.client.ChangePosition(Player.ID, Player.Position);
-                    EatFood(Player);
+                    controls.MoveDown();
                 }));
             }
         }
 
-        public ControlVM(): base(ConcreteMediator.getInstance())
+        public ControlVM() : base(ConcreteMediator.getInstance())
         {
             ConcreteMediator.getInstance().ControlVM = this;
         }
 
         public override void Send(object data)
         {
-            mediator.Send(data, this); 
+            mediator.Send(data, this);
         }
 
         public override void Notify(object data)
         {
-            if(data is ObservableCollection<FoodPoint>)
+            if (data is ObservableCollection<FoodPoint>)
             {
-                _foodPoints = (ObservableCollection<FoodPoint>)data;
+                //_foodPoints = (ObservableCollection<FoodPoint>)data;
+                controls.FoodPoints = (ObservableCollection<FoodPoint>)data;
+                return;
+            }
+            if(data is ClientPlayer)
+            {
+                controls.Player = (ClientPlayer)data;
+                return;
             }
         }
-
-        private void EatFood(ClientPlayer player)
-        {
-            int number = 0;
-            foreach(FoodPoint food in _foodPoints)
-            {
-                double l = Math.Sqrt(Math.Pow(food.Position.X+5 - (player.Position.X+player.Size/2), 2)
-                    + Math.Pow(food.Position.Y+5 - (player.Position.Y+player.Size/2), 2));
-
-                if (Math.Abs(l) < 5+player.Size/2) //5 = ширина/длина шара еды/2
-                {
-                    number = food.ID;
-
-                    Random r = new Random();
-                    int x = r.Next(10, 550);
-                    int y = r.Next(10, 350);
-
-                    FoodPoint foodPoint = new FoodPoint(x, y, number);
-
-                     _foodPoints.Remove(food);
-                    _foodPoints.Add(foodPoint);
-
-                    player.Size++;
-                    
-                    AuthClient.client.EatFood(number, player.ID, foodPoint);
-                    break;
-                }  
-            }
-
-        }
-
+       
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
         }
     }
 }

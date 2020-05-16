@@ -48,14 +48,13 @@ namespace ClientWPF.ViewModel
                         //Создаём игрока
                         _player = new ClientPlayer(player.Login, player.ID, player.Position);
                         ClientPlayer.Add(_player);
-
-                        ControlVM.Player = _player;
+                        Send(_player);
 
                         //Получаем игроков с сервера для отображения
-                        List<PlayerServer> EnemyList = AuthClient.client.GetAllPlayers(ClientPlayer[0].ID).ToList<PlayerServer>();
-                        foreach (PlayerServer ServerPlayer in EnemyList)
+                        List<PlayerServer> enemyList = AuthClient.client.GetAllPlayers(ClientPlayer[0].ID).ToList<PlayerServer>();
+                        foreach (PlayerServer serverPlayer in enemyList)
                         {
-                            EnemyPlayers.Add(new EnemyPlayer(ServerPlayer.Login, ServerPlayer.ID, ServerPlayer.Position));
+                            EnemyPlayers.Add(new EnemyPlayer(serverPlayer.Login, serverPlayer.ID, serverPlayer.Position));
                         }
 
                         //Получаем еду с серверa
@@ -93,14 +92,13 @@ namespace ClientWPF.ViewModel
                         _player = new ClientPlayer(player.Login, player.ID);
                         ClientPlayer.Add(_player);
 
-                        //Перевести потом в медиатор медиатор !!!!!!!!!!
-                        ControlVM.Player = _player;
+                        Send(_player);
 
                         //Получаем игроков с сервера для отображения
-                        List<PlayerServer> EnemyList = AuthClient.client.GetAllPlayers(ClientPlayer[0].ID).ToList<PlayerServer>();
-                        foreach (PlayerServer ServerPlayer in EnemyList)
+                        List<PlayerServer> enemyList = AuthClient.client.GetAllPlayers(ClientPlayer[0].ID).ToList<PlayerServer>();
+                        foreach (PlayerServer serverPlayer in enemyList)
                         {
-                            EnemyPlayers.Add(new EnemyPlayer(ServerPlayer.Login, ServerPlayer.ID, ServerPlayer.Position));
+                            EnemyPlayers.Add(new EnemyPlayer(serverPlayer.Login, serverPlayer.ID, serverPlayer.Position));
                         }
 
                         //Получаем еду с сервера
@@ -249,7 +247,8 @@ namespace ClientWPF.ViewModel
             FoodPoints.Add(foodPoint);
 
             var player = EnemyPlayers.FirstOrDefault(i => i.ID == id_player);
-            player.Size++;
+            if(player != null)
+                player.Size++;
             
            
         }

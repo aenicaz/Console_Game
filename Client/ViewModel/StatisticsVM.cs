@@ -1,27 +1,24 @@
 ﻿using ClientWPF.Engine;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClientWPF.ViewModel
 {
-    class StatisticsVM : BaseViewModel, INotifyPropertyChanged
+    internal class StatisticsVM : BaseViewModel, INotifyPropertyChanged
     {
-        private string _score;
-        private string _countPlayer;
+        private int _score;
+        private int _countPlayer;
 
-        public StatisticsVM():base(ConcreteMediator.getInstance())
+
+
+        public StatisticsVM() : base(ConcreteMediator.getInstance())
         {
             ConcreteMediator.getInstance().StatisticsVM = this;
         }
 
         public override void Notify(object data)
         {
-            
+
         }
 
         public override void Send(object data)
@@ -29,12 +26,14 @@ namespace ClientWPF.ViewModel
             //mediator 
             mediator.Send(data, this);
         }
-        public string Score
+       
+        
+        public int Score
         {
             get { return _score; }
             set { _score = value; OnPropertyChanged("Score"); }
         }
-        public string CountPlayer
+        public int CountPlayer
         {
             get { return _countPlayer; }
             set { _countPlayer = value; OnPropertyChanged("CountPlayer"); }
@@ -44,7 +43,9 @@ namespace ClientWPF.ViewModel
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
         }
     }
 }

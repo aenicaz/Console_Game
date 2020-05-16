@@ -16,7 +16,7 @@ namespace WcfService
     {
         //путь к файлу с паролями
         private string path = @"C:\Users\good\Desktop\Project\Game\Console_Game\WCFServise\WcfService\App_Data\key.txt";
-
+        
         public Service1()
         {
             FoodPoint.CreateFood();
@@ -25,84 +25,17 @@ namespace WcfService
 
         public PlayerServer Authorization(string login, string password)
         {
-            using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
-            {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] word = line.Split(' ');
-
-                    //Если уже есть авторизованнные с таким ником, то не даём авторизоваться
-                    var usedLogin = AllPlayers.players.FirstOrDefault(i => i.Login == login);
-                    if (usedLogin != null)
-                        return null;
-
-                    if (word[0] == login && word[1] == password)
-                    {
-                        Point lastPostion = LastPosition.LoadLastPosition(login);
-                        PlayerServer player = new PlayerServer(login, Guid.NewGuid(), lastPostion, OperationContext.Current);
-
-                        AllPlayers.players.Add(player);
-
-                        foreach (PlayerServer playerServer in AllPlayers.players)
-                        {
-                            if (player != playerServer)
-                            {
-                                playerServer.OperationContext.GetCallbackChannel<IClientCallback>().ConnectEnemy(player);
-                            }
-                        }
-
-                        return player;
-                    }
-                }
-                return null;
-            }
+            return AuthReg.Authorization(login, password);
         }
 
         public PlayerServer Registration(string login, string password)
         {
-            try
-            {
-                using (StreamWriter writer = new StreamWriter(path, true))
-                {
-                    writer.Write($"\n{login} {password}");
-                }
-
-                PlayerServer player = new PlayerServer(login, Guid.NewGuid(), OperationContext.Current);
-                AllPlayers.players.Add(player);
-
-                foreach (PlayerServer playerServer in AllPlayers.players)
-                {
-                    if (player != playerServer)
-                    {
-                        playerServer.OperationContext.GetCallbackChannel<IClientCallback>().ConnectEnemy(player);
-                    }
-                }
-
-                return player;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return AuthReg.Registration(login, password);
         }
-
+        //Проверка ника на доступность
         public bool AvailabilityLogin(string login)
         {
-            using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
-            {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] word = line.Split(' ');
-
-                    if (word[0] == login)
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
+            return AuthReg.AvailabilityLogin(login);
         }
 
         public void ServerStatus()

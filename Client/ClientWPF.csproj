@@ -62,7 +62,9 @@
     <Compile Include="Engine\Mediator.cs" />
     <Compile Include="Model\AuthReg.cs" />
     <Compile Include="Model\EnemyPlayer.cs" />
-    <Compile Include="Model\Statistics.cs" />
+    <Compile Include="Model\Events\PlayerEvents.cs" />
+    <Compile Include="Model\StatisticsGame.cs" />
+    <Compile Include="Model\StatisticsPlayer.cs" />
     <Compile Include="ViewModel\AppViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlVM.cs" />
@@ -169,7 +171,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Animation\" />
+    <Folder Include="Animation\Client\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
