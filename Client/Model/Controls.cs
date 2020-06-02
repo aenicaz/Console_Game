@@ -99,8 +99,6 @@ namespace ClientWPF.Model
                     _foodPoints.Remove(food);
                     _foodPoints.Add(foodPoint);
 
-                    player.Size++;
-
                     AuthClient.client.EatFood(number, player.ID, foodPoint);
                     break;
                 }

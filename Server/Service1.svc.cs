@@ -121,6 +121,7 @@ namespace WcfService
 
             var player = AllPlayers.players.FirstOrDefault(i => i.ID == id_player);
             player.Size++;
+            player.Score++;
 
             foreach (PlayerServer playerServer in AllPlayers.players)
             {

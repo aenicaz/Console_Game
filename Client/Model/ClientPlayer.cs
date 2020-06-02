@@ -14,7 +14,7 @@ namespace ClientWPF.Model
         private Point _position;
         private int _size;
         private Brush _color;
-        public StatisticsPlayer stats = new StatisticsPlayer();
+        private StatisticsPlayer stats;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,6 +50,11 @@ namespace ClientWPF.Model
             get { return _color; }
             set { _color = value; OnPropertyChanged("ColorRect"); }
         }
+        public int Score
+        {
+            get { return stats.Score; }
+            set { stats.Score = value; OnPropertyChanged("Score");  }
+        }
 
         public ClientPlayer(string login, Guid id)
         {
@@ -57,7 +62,7 @@ namespace ClientWPF.Model
             _login = login;
             _id = id;
             ColorRect = GetRandomColor();
-
+            stats = new StatisticsPlayer(_login);
             
             PlayerEvents.GetInstance().Eat += EatFood;
 
@@ -69,11 +74,15 @@ namespace ClientWPF.Model
             _id = id;
             Position = position;
             ColorRect = GetRandomColor();
+            stats = new StatisticsPlayer(_login);
+
+            PlayerEvents.GetInstance().Eat += EatFood;
         }
 
         private void EatFood()
         {
             Size++;
+            Score++;
         }
         private Brush GetRandomColor()
         {

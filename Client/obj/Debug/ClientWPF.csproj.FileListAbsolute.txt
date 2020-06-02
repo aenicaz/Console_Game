@@ -61,3 +61,14 @@ C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\ClientWPF
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\ClientWPF.csproj.CopyComplete
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\ClientWPF.exe
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\ClientWPF.pdb
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll

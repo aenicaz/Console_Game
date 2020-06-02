@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:local="clr-namespace:ClientWPF"
-        xmlns:vm="clr-namespace:ClientWPF.ViewModel"  
+        xmlns:vm="clr-namespace:ClientWPF.ViewModel" 
+        xmlns:anim="clr-namespace:ClientWPF.Animation"
         mc:Ignorable="d"
         Title="MainWindow" Height="372" Width="618"
         >
@@ -30,12 +32,24 @@
             <Button x:Name="btnReg" IsEnabled="{Binding Enabled, Mode=OneWay}" Command="{Binding Registration}" Content="Регистрация" HorizontalAlignment="Left" Height="25" Margin="93,167,0,0" VerticalAlignment="Top" Width="111" Background="White" BorderBrush="#FF797EFF" Foreground="#FF2E4D5F"/>
             <Label x:Name="AvailabilityLogin" Content="{Binding Status, Mode=OneWay}" Foreground="#FF2E4D5F" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-22,0.8" Background="White"/>
         </Grid>
-        
-        <!-- Статистика игры -->
-        <Grid DataContext="{StaticResource StatisticsVM}">
-            
-        </Grid>
 
+        
+        <!-- Статистика -->
+        <ItemsControl x:Name="Score" ItemsSource="{Binding Source={StaticResource StatisticsVM}, Path=ScorePlayer}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel  Width="100" Orientation="Vertical" IsItemsHost="True"></StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Nick}"></Label>
+                        <Label Content="{Binding Score}"></Label>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <!-- Отображение игрока -->
         <ItemsControl x:Name="Player" ItemsSource="{Binding ClientPlayer, Mode=OneWay}">
             <ItemsControl.ItemsPanel>
@@ -53,9 +67,11 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                       
-                        <Ellipse Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}" />
-                        <Label Content="{Binding Login}"></Label>
+                        <Ellipse x:Name="lPLayer" Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}"/>
+                        <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Login}"/>
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Score}"/>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
@@ -78,15 +94,23 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Ellipse Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}" />
-                        <Label Content="{Binding Login}"></Label>
+                        <Ellipse Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}"/>
+                        <StackPanel>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Login}"/>
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Score}"/>
+                        </StackPanel>
+
                     </Grid>
 
 
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+
         
+
+
         <!-- Отображение еды -->
         <ItemsControl x:Name="Food"  ItemsSource="{Binding FoodPoints, Mode=OneWay}">
             <ItemsControl.ItemsPanel>

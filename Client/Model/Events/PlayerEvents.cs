@@ -13,6 +13,7 @@ namespace ClientWPF.Model.Events
 
         public event PlayerHandler ChangePos;
         public event PlayerHandler Eat;
+        public event PlayerHandler EnemyEat;
         
 
         //Вызов события измение позиции
@@ -23,6 +24,10 @@ namespace ClientWPF.Model.Events
         public void EatFood()
         {
             Eat?.Invoke();
+        }
+        public void EnemyEatFood()
+        {
+            EnemyEat?.Invoke();
         }
 
         public static PlayerEvents GetInstance()

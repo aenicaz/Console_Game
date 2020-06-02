@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace ClientWPF.Model
 {
-    class StatisticsGame
+    class StatisticsGame: Statistics
     {
         private int _countPlayer;
+        private List<string> _scorePlayer;
 
+        public StatisticsGame()
+        {
+            AddGameStats(this);
+        }
     }
 }

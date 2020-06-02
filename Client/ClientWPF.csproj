@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -58,11 +59,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Animation\SimpleAnimation.cs" />
     <Compile Include="Engine\ConcreteMediator.cs" />
     <Compile Include="Engine\Mediator.cs" />
     <Compile Include="Model\AuthReg.cs" />
     <Compile Include="Model\EnemyPlayer.cs" />
+    <Compile Include="Model\Events\GameEvents.cs" />
     <Compile Include="Model\Events\PlayerEvents.cs" />
+    <Compile Include="Model\Statistics.cs" />
     <Compile Include="Model\StatisticsGame.cs" />
     <Compile Include="Model\StatisticsPlayer.cs" />
     <Compile Include="ViewModel\AppViewModel.cs" />

@@ -9,11 +9,14 @@ using System.Windows;
 using WcfService.Engine;
 using WcfService;
 using ClientWPF.Engine;
+using ClientWPF.Animation;
+using ClientWPF.Model.Events;
 
 namespace ClientWPF.ViewModel
 {
     class AppViewModel : BaseViewModel, ServiceReference1.IAuthorizationCallback, INotifyPropertyChanged
     {
+        private AppViewModel _instance;
         private ClientPlayer _player;
         private RelayCommand _authorization;
         private RelayCommand _registration;
@@ -31,7 +34,13 @@ namespace ClientWPF.ViewModel
         private bool _btnRegEnabled;
         private string _status;
         
-
+        public AppViewModel getInstance()
+        {
+            if (_instance != null)
+                return _instance;
+            else
+                return _instance = new AppViewModel();
+        }
 
         public RelayCommand Authorization
         {
@@ -48,13 +57,14 @@ namespace ClientWPF.ViewModel
                         //Создаём игрока
                         _player = new ClientPlayer(player.Login, player.ID, player.Position);
                         ClientPlayer.Add(_player);
+
                         Send(_player);
 
                         //Получаем игроков с сервера для отображения
                         List<PlayerServer> enemyList = AuthClient.client.GetAllPlayers(ClientPlayer[0].ID).ToList<PlayerServer>();
                         foreach (PlayerServer serverPlayer in enemyList)
                         {
-                            EnemyPlayers.Add(new EnemyPlayer(serverPlayer.Login, serverPlayer.ID, serverPlayer.Position));
+                            EnemyPlayers.Add(new EnemyPlayer(serverPlayer.Login, serverPlayer.ID, serverPlayer.Size, serverPlayer.Score, serverPlayer.Position));
                         }
 
                         //Получаем еду с серверa
@@ -65,7 +75,7 @@ namespace ClientWPF.ViewModel
                         }
                         //Передаём еду в ControlVM
                         Send(FoodPoints);
-
+                        
                     }
                     else
                     {
@@ -91,14 +101,13 @@ namespace ClientWPF.ViewModel
                         //Создаём игрока
                         _player = new ClientPlayer(player.Login, player.ID);
                         ClientPlayer.Add(_player);
-
                         Send(_player);
 
                         //Получаем игроков с сервера для отображения
                         List<PlayerServer> enemyList = AuthClient.client.GetAllPlayers(ClientPlayer[0].ID).ToList<PlayerServer>();
                         foreach (PlayerServer serverPlayer in enemyList)
                         {
-                            EnemyPlayers.Add(new EnemyPlayer(serverPlayer.Login, serverPlayer.ID, serverPlayer.Position));
+                            EnemyPlayers.Add(new EnemyPlayer(serverPlayer.Login, serverPlayer.ID, serverPlayer.Size, serverPlayer.Score, serverPlayer.Position));
                         }
 
                         //Получаем еду с сервера
@@ -146,7 +155,7 @@ namespace ClientWPF.ViewModel
 
         //
 
-        public AppViewModel(Mediator mediator): base(mediator)
+        public AppViewModel(): base(ConcreteMediator.getInstance())
         {
             AuthClient.client = new ServiceReference1.AuthorizationClient(new System.ServiceModel.InstanceContext(this));
             AuthClient.client.ServerStatus();
@@ -226,6 +235,7 @@ namespace ClientWPF.ViewModel
         public void DisconectEnemy(Guid id)
         {
             var player = EnemyPlayers.FirstOrDefault(i => i.ID == id);
+            player.DeleteStats();
             EnemyPlayers.Remove(player);
         }
 
@@ -238,7 +248,7 @@ namespace ClientWPF.ViewModel
 
         public void ConnectEnemy(PlayerServer player)
         {
-            EnemyPlayers.Add(new EnemyPlayer(player.Login, player.ID, player.Position));
+            EnemyPlayers.Add(new EnemyPlayer(player.Login, player.ID, player.Size, player.Score, player.Position));
         }
         public void EnemyEatFood(FoodPoint foodPoint, int id, Guid id_player)
         {
@@ -248,9 +258,13 @@ namespace ClientWPF.ViewModel
 
             var player = EnemyPlayers.FirstOrDefault(i => i.ID == id_player);
             if(player != null)
+            {
                 player.Size++;
-            
-           
+                player.Score++;
+            }
+
+            PlayerEvents.GetInstance().EnemyEatFood();
+                
         }
 
 

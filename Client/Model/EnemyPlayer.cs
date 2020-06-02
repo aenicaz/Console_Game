@@ -16,6 +16,7 @@ namespace ClientWPF.Model
         private Point _position;
         private Brush _color;
         private int _size = 32;
+        private StatisticsPlayer stats;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -40,6 +41,12 @@ namespace ClientWPF.Model
             get { return _color; }
             set { _color = value; OnPropertyChanged("ColorRect"); }
         }
+        public int Score
+        {
+            get { return stats.Score; }
+            set { stats.Score = value; OnPropertyChanged("Score"); }
+        }
+
 
         public EnemyPlayer(string login, Guid id)
         {
@@ -47,15 +54,25 @@ namespace ClientWPF.Model
             ID = id;
             ColorRect = GetRandomColor();
 
+            stats = new StatisticsPlayer(_login);
+
         }
-        public EnemyPlayer(string login, Guid id, Point position)
+        public EnemyPlayer(string login, Guid id, int Size, int Score, Point position)
         {
             _login = login;
+            stats = new StatisticsPlayer(_login);
             ID = id;
+            this.Size = Size;
+            stats.Score = Score;
             ColorRect = GetRandomColor();
             Position = position;
-        }
 
+            
+        }
+        public void DeleteStats()
+        {
+            stats.Delete();
+        }
         private Brush GetRandomColor()
         {
             Random r = new Random();

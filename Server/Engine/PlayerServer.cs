@@ -17,6 +17,8 @@ namespace WcfService.Engine
         private Point _position;
         [DataMember]
         private int _size;
+        [DataMember]
+        private int _score;
 
         public OperationContext OperationContext {get;set;}
 
@@ -48,6 +50,11 @@ namespace WcfService.Engine
             set { _size = value; }
         }
 
+        public int Score
+        {
+            get { return _score; }
+            set { _score = value; }
+        }
         public PlayerServer(string login, Guid id, Point lastPosition, OperationContext operationContext)
         {
             _login = login;
