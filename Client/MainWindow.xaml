@@ -4,16 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-        xmlns:local="clr-namespace:ClientWPF"
-        xmlns:vm="clr-namespace:ClientWPF.ViewModel" 
-        xmlns:anim="clr-namespace:ClientWPF.Animation"
+        xmlns:vm="clr-namespace:ClientWPF.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="372" Width="618"
+        Background="{Binding BackColor}"
         >
     <Window.Resources>
-        <vm:StatisticsVM x:Key="StatisticsVM"></vm:StatisticsVM>
-        <vm:ControlVM x:Key="ControlVM"></vm:ControlVM>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UI/StatsStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <vm:StatisticsVM x:Key="StatisticsVM"/>
+            <vm:ControlVM x:Key="ControlVM"/>
+        </ResourceDictionary>
     </Window.Resources>
 
     <i:Interaction.Triggers>
@@ -21,8 +24,8 @@
             <i:InvokeCommandAction Command="{Binding Closing}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-   
-    
+
+
     <Grid>
         <!-- Авторизация\Регистрация -->
         <Grid Visibility="{Binding Visible, Mode=OneWay}" HorizontalAlignment="Left" Height="220" Margin="127,54,0,0" VerticalAlignment="Top" Width="410" Background="White" >
@@ -32,20 +35,33 @@
             <Button x:Name="btnReg" IsEnabled="{Binding Enabled, Mode=OneWay}" Command="{Binding Registration}" Content="Регистрация" HorizontalAlignment="Left" Height="25" Margin="93,167,0,0" VerticalAlignment="Top" Width="111" Background="White" BorderBrush="#FF797EFF" Foreground="#FF2E4D5F"/>
             <Label x:Name="AvailabilityLogin" Content="{Binding Status, Mode=OneWay}" Foreground="#FF2E4D5F" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-22,0.8" Background="White"/>
         </Grid>
-
         
+        <Viewport3D>
+            <Viewport3D.Camera >
+                <PerspectiveCamera Position="0,0,2"></PerspectiveCamera>
+            </Viewport3D.Camera>
+        </Viewport3D>
+
         <!-- Статистика -->
         <ItemsControl x:Name="Score" ItemsSource="{Binding Source={StaticResource StatisticsVM}, Path=ScorePlayer}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel  Width="100" Orientation="Vertical" IsItemsHost="True"></StackPanel>
+                    <StackPanel Style="{Binding Source={StaticResource StatsStyle}}"  Width="100" Orientation="Vertical" IsItemsHost="True"></StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding Nick}"></Label>
-                        <Label Content="{Binding Score}"></Label>
+                        <Border Width="90" BorderBrush="#FF1DDE86" CornerRadius="0 3 3 0" BorderThickness="1" Background="#FF2D2A31" Margin="0,0,-12,0" >
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label HorizontalContentAlignment="Left" Width="40" BorderThickness="0" BorderBrush="#FF6D4F6F" Foreground="#FF1DDE86" Height="27"  Background="{x:Null}"  Content="{Binding Nick}"></Label>
+                                    <Label HorizontalContentAlignment="Right" Width="50" BorderThickness="0" BorderBrush="#FF6D4F6F" Foreground="#FF1DDE86" Height="27"  Background="{x:Null}"  Content="{Binding Score}"></Label>
+                                </StackPanel>
+                                
+                            </Grid>
+                        </Border>
+                        
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
@@ -67,7 +83,11 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Ellipse x:Name="lPLayer" Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}"/>
+                        <Ellipse x:Name="lPLayer" Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}">
+                            <Ellipse.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="{Binding ColorRect, Mode=OneWay}" RenderingBias="Quality"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
                         <StackPanel VerticalAlignment="Center" Orientation="Vertical">
                             <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Login}"/>
                             <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Score}"/>
@@ -94,7 +114,11 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Ellipse Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}"/>
+                        <Ellipse Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding ColorRect, Mode=OneWay}">
+                            <Ellipse.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="{Binding ColorRect, Mode=OneWay}" RenderingBias="Quality"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
                         <StackPanel>
                             <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Login}"/>
                             <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Score}"/>
@@ -129,7 +153,11 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Ellipse Fill="Green" Width="10" Height="10" />
+                        <Ellipse Fill="#16BA00" Width="10" Height="10">
+                            <Ellipse.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="#16BA00" RenderingBias="Quality"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

@@ -33,7 +33,10 @@ namespace ClientWPF.ViewModel
         private Visibility _visible;
         private bool _btnRegEnabled;
         private string _status;
-        
+        //Цвет фона
+        private string _backcolor = "white"; //#FF27262C
+
+
         public AppViewModel getInstance()
         {
             if (_instance != null)
@@ -51,7 +54,8 @@ namespace ClientWPF.ViewModel
                     var player = AuthClient.client.Authorization(Login.ToLower(), Password);
                     if (player != null)
                     {
-
+                        //Меняем цвет фона
+                        BackColor = "#FF27262C";
                         //Скрываем панель Авторизации
                         Visible = Visibility.Collapsed;
                         //Создаём игрока
@@ -199,6 +203,11 @@ namespace ClientWPF.ViewModel
                 _status = value;
                 OnPropertyChanged("Status");
                 } 
+        }
+        public string BackColor
+        {
+            get { return _backcolor; }
+            set { _backcolor = value; OnPropertyChanged("BackColor"); }
         }
         public bool Enabled
         {

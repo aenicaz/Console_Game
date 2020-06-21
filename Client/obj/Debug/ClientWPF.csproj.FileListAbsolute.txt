@@ -72,3 +72,6 @@ C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\ja\Micros
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
 C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\UI\StatsStyle.baml
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\UI\test.g.cs
+C:\Users\good\Desktop\Project\Game\Aggar\Console_Game\Client\obj\Debug\UI\test.baml
